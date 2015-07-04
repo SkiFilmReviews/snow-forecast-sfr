@@ -2,7 +2,7 @@
 Source code for the npm module that scraps snow-forecast.com. This is an unofficial scraper.
 
 ## Introduction
-Teach your server HTML.
+Enough chit-chat, just show me how to use it in 5 lines.
 
 ```js
 var snow = require('snow-forecast-sfr');
