@@ -31,7 +31,7 @@ This is an unofficial module, and thus if snow-forecast decide to change the str
 
 ## Who uses this
 
-Currently this is used by [Niseko Pow](www.nisekopow.com). If you do use this please let us know and we'll put your name up here.
+Currently this is used by [Niseko Pow](http://www.nisekopow.com). If you do use this please let us know and we'll put your name up here.
 
 ## Our Dependencies
 
