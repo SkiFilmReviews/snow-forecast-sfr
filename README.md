@@ -12,6 +12,164 @@ snow.parseResort('Tignes', 'mid', function(json){
 });
 ```
 
+## Sample JSON
+If it isn't expected to snow and/or rain then a - is input there. Otherwise the numerical value displayed on the site appears.
+
+```javascript
+{
+  name: "NisekoAnnpuriKokusai",
+  url: "http://www.snow-forecast.com/resorts/NisekoAnnpuriKokusai/6day/top",
+  issuedDate: "2pm 05 Jul 2015",
+  elevation: "top",
+  forecast: [
+  {
+      time: "Sunday PM",
+      wind: "15",
+      summary: "clear",
+      snow: "-",
+      rain: "-",
+      freezingLevel: "3200"
+  },
+  {
+      time: "Sunday night",
+      wind: "15",
+      summary: "clear",
+      snow: "-",
+      rain: "-",
+      freezingLevel: "3350"
+  },
+  {
+      time: "Monday AM",
+      wind: "5",
+      summary: "clear",
+      snow: "-",
+      rain: "-",
+      freezingLevel: "3300"
+  },
+  {
+      time: "Monday PM",
+      wind: "10",
+      summary: "clear",
+      snow: "-",
+      rain: "-",
+      freezingLevel: "3450"
+  },
+  {
+      time: "Monday night",
+      wind: "25",
+      summary: "clear",
+      snow: "-",
+      rain: "-",
+      freezingLevel: "3600"
+  },
+  {
+      time: "Tuesday AM",
+      wind: "55",
+      summary: "clear",
+      snow: "-",
+      rain: "-",
+      freezingLevel: "3750"
+  },
+  {
+      time: "Tuesday PM",
+      wind: "30",
+      summary: "rain shwrs",
+      snow: "-",
+      rain: "1",
+      freezingLevel: "3750"
+  },
+  {
+      time: "Tuesday night",
+      wind: "25",
+      summary: "rain shwrs",
+      snow: "-",
+      rain: "1",
+      freezingLevel: "3450"
+  },
+  {
+      time: "Wednesday AM",
+      wind: "15",
+      summary: "clear",
+      snow: "-",
+      rain: "-",
+      freezingLevel: "3400"
+  },
+  {
+      time: "Wednesday PM",
+      wind: "10",
+      summary: "clear",
+      snow: "-",
+      rain: "-",
+      freezingLevel: "3400"
+  },
+  {
+      time: "Wednesday night",
+      wind: "5",
+      summary: "clear",
+      snow: "-",
+      rain: "-",
+      freezingLevel: "3500"
+  },
+  {
+      time: "Thursday AM",
+      wind: "5",
+      summary: "clear",
+      snow: "-",
+      rain: "-",
+      freezingLevel: "3750"
+  },
+  {
+      time: "Thursday PM",
+      wind: "0",
+      summary: "clear",
+      snow: "-",
+      rain: "-",
+      freezingLevel: "3900"
+  },
+  {
+      time: "Thursday night",
+      wind: "10",
+      summary: "clear",
+      snow: "-",
+      rain: "-",
+      freezingLevel: "4000"
+  },
+  {
+      time: "Friday AM",
+      wind: "10",
+      summary: "clear",
+      snow: "-",
+      rain: "-",
+      freezingLevel: "3950"
+  },
+  {
+      time: "Friday PM",
+      wind: "15",
+      summary: "clear",
+      snow: "-",
+      rain: "-",
+      freezingLevel: "3850"
+  },
+  {
+      time: "Friday night",
+      wind: "20",
+      summary: "clear",
+      snow: "-",
+      rain: "-",
+      freezingLevel: "3950"
+  },
+  {
+      time: "Saturday AM",
+      wind: "20",
+      summary: "clear",
+      snow: "-",
+      rain: "-",
+      freezingLevel: "3900"
+  }
+  ]
+}
+```
+
 ## Installation
 `npm install snow-forecast-sfr`
 
@@ -43,5 +201,3 @@ We rely on the following npm modules:
 ## Future Features
 
 We have a few ideas but we would love to hear any you encounter in. Feel free to raise an issue and let us know :)
-
-

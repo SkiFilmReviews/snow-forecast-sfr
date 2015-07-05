@@ -116,7 +116,7 @@ var SnowRequest = function() {
       }
 
       //Extrapolate time-relevant information needed to build forecast, and build object.
-      var issued = $('div.forecast-mid-header em nobr').text();
+      var issued = TimeUtil.fixIssueDateFormat($('div.forecast-mid-header em nobr').text());
       var startDay = $($('table tr.day-names td')[0]).text();
       var match = issued.match(/^\d+/);
       var time = [];

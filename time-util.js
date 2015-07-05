@@ -70,8 +70,7 @@ TimeUtil = {
     *
     * returns: correctDay: The correctly formatted day to check against our index of days.
     */
-    correctDay: function(day)
-    {
+    correctDay: function(day){
       //If length of day is sufficient, just trim
       if(day.length > this.MIN_DAY_STRING_LEN){
         return day.split(" ")[0].trim();
@@ -83,6 +82,23 @@ TimeUtil = {
           return this.days[i];
         }
       }
+    },
+
+    /*
+    * PUBLIC
+    * Cheerio returns us an oddly formatted string which the site uses to show
+    * when the forecast was issued. In order to make it easier for developers to
+    * manipulate, let's make sure we always deliver a consistent issued date.
+    * issuedDate: the date we get from cheerio
+    *
+    * returns: a string ie: 2pm 07 Jul 2015
+    */
+    fixIssueDateFormat: function(issuedDate){
+      var tmpDateArray = issuedDate.split(" ");
+      var tmpDate = tmpDateArray.join('').match(/(\d+|[^\d]+)/g);
+
+      return tmpDate[0] + tmpDate[1].trim() + ' ' + tmpDate[2] + ' ' + tmpDate[3].trim() +
+        ' ' + tmpDate[4];
     }
 };
 
