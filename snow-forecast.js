@@ -5,7 +5,7 @@ var SnowRequest = require('./snow-request.js');
 var request = new SnowRequest();
 
 module.exports = {
-    parseResort: function(name, elevation, cb){
-      request.parseResort(name, elevation, cb);
+    parseResort: function(name, elevation, cb, opts){
+      request.parseResort(name, elevation, cb, opts);
     }
 };

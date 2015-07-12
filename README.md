@@ -12,161 +12,178 @@ snow.parseResort('Tignes', 'mid', function(json){
 });
 ```
 
+## Options
+
+Currently snow-forecast decides whether to show units in metric or imperial based
+on where the request is coming from. If you need to specify whether the response
+should be in imperial or metric units simply do the following:
+
+```js
+snow.parseResort('Tignes', 'mid', function(json){
+      //json contains the forecast JSON
+}, { isMetric: false });
+```
+
+By passing in an options hash with the value for the isMetric key set to true for
+metric, or false for imperial.
+
+
 ## Sample JSON
 If it isn't expected to snow and/or rain then a - is input there. Otherwise the numerical value displayed on the site appears.
 
 ```javascript
 {
-  name: "NisekoAnnpuriKokusai",
-  url: "http://www.snow-forecast.com/resorts/NisekoAnnpuriKokusai/6day/top",
-  issuedDate: "2pm 05 Jul 2015",
-  elevation: "top",
-  forecast: [
-  {
-      time: "Sunday PM",
-      wind: "15",
-      summary: "clear",
-      snow: "-",
-      rain: "-",
-      freezingLevel: "3200"
-  },
-  {
-      time: "Sunday night",
-      wind: "15",
-      summary: "clear",
-      snow: "-",
-      rain: "-",
-      freezingLevel: "3350"
-  },
-  {
-      time: "Monday AM",
-      wind: "5",
-      summary: "clear",
-      snow: "-",
-      rain: "-",
-      freezingLevel: "3300"
-  },
-  {
-      time: "Monday PM",
-      wind: "10",
-      summary: "clear",
-      snow: "-",
-      rain: "-",
-      freezingLevel: "3450"
-  },
-  {
-      time: "Monday night",
-      wind: "25",
-      summary: "clear",
-      snow: "-",
-      rain: "-",
-      freezingLevel: "3600"
-  },
-  {
-      time: "Tuesday AM",
-      wind: "55",
-      summary: "clear",
-      snow: "-",
-      rain: "-",
-      freezingLevel: "3750"
-  },
-  {
-      time: "Tuesday PM",
-      wind: "30",
-      summary: "rain shwrs",
-      snow: "-",
-      rain: "1",
-      freezingLevel: "3750"
-  },
-  {
-      time: "Tuesday night",
-      wind: "25",
-      summary: "rain shwrs",
-      snow: "-",
-      rain: "1",
-      freezingLevel: "3450"
-  },
-  {
-      time: "Wednesday AM",
-      wind: "15",
-      summary: "clear",
-      snow: "-",
-      rain: "-",
-      freezingLevel: "3400"
-  },
-  {
-      time: "Wednesday PM",
-      wind: "10",
-      summary: "clear",
-      snow: "-",
-      rain: "-",
-      freezingLevel: "3400"
-  },
-  {
-      time: "Wednesday night",
-      wind: "5",
-      summary: "clear",
-      snow: "-",
-      rain: "-",
-      freezingLevel: "3500"
-  },
-  {
-      time: "Thursday AM",
-      wind: "5",
-      summary: "clear",
-      snow: "-",
-      rain: "-",
-      freezingLevel: "3750"
-  },
-  {
-      time: "Thursday PM",
-      wind: "0",
-      summary: "clear",
-      snow: "-",
-      rain: "-",
-      freezingLevel: "3900"
-  },
-  {
-      time: "Thursday night",
-      wind: "10",
-      summary: "clear",
-      snow: "-",
-      rain: "-",
-      freezingLevel: "4000"
-  },
-  {
-      time: "Friday AM",
-      wind: "10",
-      summary: "clear",
-      snow: "-",
-      rain: "-",
-      freezingLevel: "3950"
-  },
-  {
-      time: "Friday PM",
-      wind: "15",
-      summary: "clear",
-      snow: "-",
-      rain: "-",
-      freezingLevel: "3850"
-  },
-  {
-      time: "Friday night",
-      wind: "20",
-      summary: "clear",
-      snow: "-",
-      rain: "-",
-      freezingLevel: "3950"
-  },
-  {
-      time: "Saturday AM",
-      wind: "20",
-      summary: "clear",
-      snow: "-",
-      rain: "-",
-      freezingLevel: "3900"
-  }
-  ]
+    name: "Valle-Nevado",
+    url: "http://www.snow-forecast.com/resorts/Valle-Nevado/6day/top",
+    issuedDate: "1pm 12 Jul 2015",
+    elevation: "top",
+    units: "metric",
+    forecast: [
+        {
+            time: "Sunday PM",
+            summary: "heavy snow",
+            wind: 25,
+            snow: 28,
+            rain: null,
+            freezingLevel: 2000
+        },
+        {
+            time: "Sunday night",
+            summary: "heavy snow",
+            wind: 10,
+            snow: 60,
+            rain: null,
+            freezingLevel: 1600
+        },
+        {
+            time: "Monday AM",
+            summary: "snow shwrs",
+            wind: 10,
+            snow: 3,
+            rain: null,
+            freezingLevel: 1700
+        },
+        {
+            time: "Monday PM",
+            summary: "snow shwrs",
+            wind: 20,
+            snow: 2,
+            rain: null,
+            freezingLevel: 1600
+        },
+        {
+            time: "Monday night",
+            summary: "snow shwrs",
+            wind: 0,
+            snow: 2,
+            rain: null,
+            freezingLevel: 1050
+        },
+        {
+            time: "Tuesday AM",
+            summary: "clear",
+            wind: 5,
+            snow: null,
+            rain: null,
+            freezingLevel: 1900
+        },
+        {
+            time: "Tuesday PM",
+            summary: "clear",
+            wind: 10,
+            snow: null,
+            rain: null,
+            freezingLevel: 1900
+        },
+        {
+            time: "Tuesday night",
+            summary: "clear",
+            wind: 0,
+            snow: null,
+            rain: null,
+            freezingLevel: 1700
+        },
+        {
+            time: "Wednesday AM",
+            summary: "snow shwrs",
+            wind: 10,
+            snow: null,
+            rain: null,
+            freezingLevel: 2350
+        },
+        {
+            time: "Wednesday PM",
+            summary: "light snow",
+            wind: 20,
+            snow: 1,
+            rain: null,
+            freezingLevel: 2100
+        },
+        {
+            time: "Wednesday night",
+            summary: "light snow",
+            wind: 5,
+            snow: 1,
+            rain: null,
+            freezingLevel: 2050
+        },
+        {
+            time: "Thursday AM",
+            summary: "some clouds",
+            wind: 10,
+            snow: null,
+            rain: null,
+            freezingLevel: 3100
+        },
+        {
+            time: "Thursday PM",
+            summary: "some clouds",
+            wind: 10,
+            snow: null,
+            rain: null,
+            freezingLevel: 3150
+        },
+        {
+            time: "Thursday night",
+            summary: "clear",
+            wind: 10,
+            snow: null,
+            rain: null,
+            freezingLevel: 2900
+        },
+        {
+            time: "Friday AM",
+            summary: "clear",
+            wind: 20,
+            snow: null,
+            rain: null,
+            freezingLevel: 3350
+        },
+        {
+            time: "Friday PM",
+            summary: "clear",
+            wind: 25,
+            snow: null,
+            rain: null,
+            freezingLevel: 3150
+        },
+        {
+            time: "Friday night",
+            summary: "clear",
+            wind: 25,
+            snow: null,
+            rain: null,
+            freezingLevel: 2500
+        },
+        {
+            time: "Saturday AM",
+            summary: "some clouds",
+            wind: 25,
+            snow: null,
+            rain: null,
+            freezingLevel: 2750
+        }
+    ]
 }
 ```
 
@@ -175,7 +192,7 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
 
 ### API
 
-parseResort takes three parameters, the name of the resort (as is found on snow-forecast.com), the elevation (low, mid or top) and a callback where you specify what to do with the returned object.
+parseResort takes three parameters, the name of the resort (as is found on snow-forecast.com), the elevation (low, mid or top), a callback where you specify what to do with the returned object and an options object where you can specify the units.
 
 ### Types of Errors
 * Invalid page 404 - snow-forecast.com returned a 404, usually because the resort name you gave differs to how it's used on snow-forecast.com
