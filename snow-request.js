@@ -7,8 +7,10 @@ var SnowRequest = function() {
   var request = require('request');
   var cheerio = require('cheerio');
   var TimeUtil = require('./time-util.js');
+  var UnitUtil = require('./unit-util.js');
   var Elevation = require('./elevation.js');
   var coreURL = 'http://www.snow-forecast.com/resorts/';
+  var unitsInMetric;
   var MAX_CELLS = 18;
 
   /**
@@ -16,7 +18,7 @@ var SnowRequest = function() {
   *   url: The generated url
   *   cb: Callback to pass response to
   */
-  function pMakeRequest(url, cb){
+  function pMakeRequest(url, cb, opts){
     request(url, function(error, response, html){
       if(!error){
         try{
@@ -53,13 +55,16 @@ var SnowRequest = function() {
   /**
   * Helper method to build forecast JSON object
   * $: The cheerio object which we use to extract the forecast data
-  * _name: Resort name
-  * issued: Time the forecast was issued
-  * elev: Elevation
-  * _url: URL
+  * forecastOpt: Hash object with following information:
+  *  resort: Resort name
+  *  url: URL of request
+  *  elevation: Elevation requested
+  *  issuedDate: Date that forecast was issued
+  *  startDay: First day of forecast
+  *  isMetric: Whether response is in metric units or not
   * cb: Callback function to pass completed JSON object to.
   */
-  function pBuildForecast($, _name, issued, elev, _url, cb) {
+  function pBuildForecast($, forecastOpt, cb) {
     //Get various forecast information containers
     var firstTime = $($('table tr.lar.hea2 td span.tiny.en')[0]).text();
     var snowForecast = $('span.snow');
@@ -70,27 +75,68 @@ var SnowRequest = function() {
 
     //Create forecast object, and init forecast array for later
     var forecastObj = {
-        name: _name,
-        url: _url,
-        issuedDate: issued[0], //issued[0] is date forecast was issued
-        elevation: elev,
+        name: forecastOpt.resort,
+        url: forecastOpt.url,
+        issuedDate: forecastOpt.issuedDate,
+        elevation: forecastOpt.elevation,
+        units: unitsInMetric ? 'metric' : 'imperial',
         forecast: []
     };
 
     var forecastArr = [];
     //Loop over forecasts, get relevant information for each and push to temp array
     for(var i = 0; i < MAX_CELLS; i++){
-       forecastArr.push({
-            time: TimeUtil.getTime(TimeUtil.getTimeOffset(firstTime), issued[1], i), //issued[1] is startDay
-            wind: $(winds[i]).text(),
-            summary: $(summary[i]).text(),
-            snow: $(snowForecast[i]).text(),
-            rain: $(rainForecast[i]).text(),
-            freezingLevel: $(freezingLevel[i]).text()
-        });
+      var cellObj = {
+        time: TimeUtil.getTime(TimeUtil.getTimeOffset(firstTime), forecastOpt.startDay, i), //issued[1] is startDay
+        summary: $(summary[i]).text(),
+        wind: parseInt($(winds[i]).text(), 10),
+        snow: parseInt($(snowForecast[i]).text(), 10),
+        rain: parseInt($(rainForecast[i]).text(), 10),
+        freezingLevel: parseInt($(freezingLevel[i]).text(),10)
+      };
+      //If units requested isn't what's returned, convert
+      if(forecastOpt.isMetric !== unitsInMetric){
+        cellObj = pConvertUnits(cellObj, unitsInMetric);
+      }
+      forecastArr.push(cellObj);
     }
     forecastObj.forecast = forecastArr;
     cb(forecastObj);
+  }
+
+  /*
+  * Simple method that converts all relevant fields to either metric or imperial.
+  * obj
+  *  The existing forecast object that contains all the fields
+  * toMetric
+  *  a boolean on whether to convert to metric or not.
+  */
+  function pConvertUnits(obj, toMetric){
+    if(toMetric){
+      obj.wind = UnitUtil.speedToMetric(obj.wind);
+      obj.snow = UnitUtil.volumeToMetric(obj.snow) || 0;
+      obj.rain = UnitUtil.volumeToMetric(obj.rain/10) || 0;
+      obj.freezingLevel = UnitUtil.distanceToMetric(obj.freezingLevel);
+    } else {
+      obj.wind = UnitUtil.speedToImperial(obj.wind);
+      obj.snow = UnitUtil.volumeToImperial(obj.snow) || 0;
+      obj.rain = UnitUtil.volumeToImperial(obj.rain/10) || 0;
+      obj.freezingLevel = UnitUtil.distanceToImperial(obj.freezingLevel);
+    }
+    return obj;
+  }
+
+  /*
+  * Applies the options to the class if there are any, otherwise defaults them.
+  * Currently only option is whether to display units in metric or imperial.
+  * opts
+  *  A hash of options. Currently only 'inMetric'
+  */
+  function pApplyOptions(opts){
+    if(!opts){
+      return;
+    }
+    unitsInMetric = opts.inMetric === undefined ? true : opts.inMetric;
   }
 
   /*
@@ -99,8 +145,10 @@ var SnowRequest = function() {
   * resortName: Name of resort
   * elevation: The elevation we should use for the forecast
   * cb: Callback to fire with a response.
+  * opts: Hash of available runtime option parameters
   */
-  snowRequest.parseResort = function(resortName, elevation, cb){
+  snowRequest.parseResort = function(resortName, elevation, cb, opts){
+    pApplyOptions(opts);
     var url = coreURL + resortName + '/6day/' + elevation; //Build the url
 
     if(!Elevation.validate(elevation)){
@@ -115,9 +163,14 @@ var SnowRequest = function() {
         return;
       }
 
+      var forecastOptObj = { resort: resortName, elevation: elevation, url: url};
+
+      //Find out if response is in metric or not.
+      forecastOptObj.isMetric = $('.deg-c input').attr('checked') === 'checked';
       //Extrapolate time-relevant information needed to build forecast, and build object.
       var issued = TimeUtil.fixIssueDateFormat($('div.forecast-mid-header em nobr').text());
-      var startDay = $($('table tr.day-names td')[0]).text();
+      forecastOptObj.issuedDate = issued;
+      forecastOptObj.startDay = $($('table tr.day-names td')[0]).text();
       var match = issued.match(/^\d+/);
       var time = [];
       var timeIndex = issued.indexOf(match[0]) + match[0].length;
@@ -125,7 +178,7 @@ var SnowRequest = function() {
       time.push(issued.substr(timeIndex, timeIndex+2));
       time.push(issued.substr(timeIndex+3).split(/[\s]+/));
 
-      pBuildForecast($, resortName, [issued, startDay], elevation, url, function(obj){
+      pBuildForecast($, forecastOptObj, function(obj){
         if(!obj){
           cb(pBuildErrorJSON("JSON Construction Error", "Internal error occurred, please try again", url));
           return;
