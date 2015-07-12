@@ -4,7 +4,7 @@
 Elevation = {};
 
 Elevation.ENUM = {
-    LOW: 'low',
+    LOW: 'bot',
     MID: 'mid',
     TOP: 'top'
 };
