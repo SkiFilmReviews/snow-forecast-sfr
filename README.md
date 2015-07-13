@@ -1,5 +1,5 @@
 # snow-forecast-sfr - V1.1.1
-Source code for the npm module that scraps snow-forecast.com. This is an unofficial scraper.
+Source code for the npm module that scrapes snow-forecast.com. This is an unofficial scraper.
 
 ## Introduction
 Enough chit-chat, just show me how to use it in 5 lines.
