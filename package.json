@@ -1,7 +1,7 @@
 {
   "name": "snow-forecast-sfr",
-  "version": "1.0.1",
-  "description": "An NPM module that scrapes snow-forecast for the relevant resort and returns its information. For more information visit our GitHub at: https://github.com/SkiFilmReviews/snow-forecast-sfr",
+  "version": "1.1.0",
+  "description": "An NPM module that scrapes snow-forecast for the relevant resort and returns its information.",
   "main": "snow-forecast.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
