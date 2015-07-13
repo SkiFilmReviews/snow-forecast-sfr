@@ -21,17 +21,17 @@ var SnowRequest = function() {
   function pMakeRequest(url, cb, opts){
     request(url, function(error, response, html){
       if(!error){
+        var $;
         try{
-          var $ = cheerio.load(html); //Load html using cheerio for parsing
-          cb($);
-        } catch(ex){
           if(html.length < 1500 && html.indexOf('The page you were looking for doesn\'t exist') > -1){
             cb(['Invalid page(404)', 'Unable to find relevant resort forecast, ' +
               'please check the spelling and try again', url]);
-          } else {
-            cb(['Parse error', ex, url]);
           }
+          $ = cheerio.load(html); //Load html using cheerio for parsing
+        } catch(ex){
+            cb(['Parse error', ex, url]);
         }
+        cb($);
       } else {
         cb(['Remote server error', 'Unable to get response from snow-forecast' + error, url]);
       }
