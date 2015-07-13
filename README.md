@@ -1,4 +1,4 @@
-# snow-forecast-sfr
+# snow-forecast-sfr - V1.1.1
 Source code for the npm module that scrapes snow-forecast.com. This is an unofficial scraper.
 
 ## Introduction
@@ -44,7 +44,7 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
             summary: "heavy snow",
             wind: 25,
             snow: 28,
-            rain: null,
+            rain: 0,
             freezingLevel: 2000
         },
         {
@@ -52,7 +52,7 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
             summary: "heavy snow",
             wind: 10,
             snow: 60,
-            rain: null,
+            rain: 0,
             freezingLevel: 1600
         },
         {
@@ -60,7 +60,7 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
             summary: "snow shwrs",
             wind: 10,
             snow: 3,
-            rain: null,
+            rain: 0,
             freezingLevel: 1700
         },
         {
@@ -68,7 +68,7 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
             summary: "snow shwrs",
             wind: 20,
             snow: 2,
-            rain: null,
+            rain: 0,
             freezingLevel: 1600
         },
         {
@@ -76,39 +76,39 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
             summary: "snow shwrs",
             wind: 0,
             snow: 2,
-            rain: null,
+            rain: 0,
             freezingLevel: 1050
         },
         {
             time: "Tuesday AM",
             summary: "clear",
             wind: 5,
-            snow: null,
-            rain: null,
+            snow: 0,
+            rain: 0,
             freezingLevel: 1900
         },
         {
             time: "Tuesday PM",
             summary: "clear",
             wind: 10,
-            snow: null,
-            rain: null,
+            snow: 0,
+            rain: 0,
             freezingLevel: 1900
         },
         {
             time: "Tuesday night",
             summary: "clear",
             wind: 0,
-            snow: null,
-            rain: null,
+            snow: 0,
+            rain: 0,
             freezingLevel: 1700
         },
         {
             time: "Wednesday AM",
             summary: "snow shwrs",
             wind: 10,
-            snow: null,
-            rain: null,
+            snow: 0,
+            rain: 0,
             freezingLevel: 2350
         },
         {
@@ -116,7 +116,7 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
             summary: "light snow",
             wind: 20,
             snow: 1,
-            rain: null,
+            rain: 0,
             freezingLevel: 2100
         },
         {
@@ -124,63 +124,63 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
             summary: "light snow",
             wind: 5,
             snow: 1,
-            rain: null,
+            rain: 0,
             freezingLevel: 2050
         },
         {
             time: "Thursday AM",
             summary: "some clouds",
             wind: 10,
-            snow: null,
-            rain: null,
+            snow: 0,
+            rain: 0,
             freezingLevel: 3100
         },
         {
             time: "Thursday PM",
             summary: "some clouds",
             wind: 10,
-            snow: null,
-            rain: null,
+            snow: 0,
+            rain: 0,
             freezingLevel: 3150
         },
         {
             time: "Thursday night",
             summary: "clear",
             wind: 10,
-            snow: null,
-            rain: null,
+            snow: 0,
+            rain: 0,
             freezingLevel: 2900
         },
         {
             time: "Friday AM",
             summary: "clear",
             wind: 20,
-            snow: null,
-            rain: null,
+            snow: 0,
+            rain: 0,
             freezingLevel: 3350
         },
         {
             time: "Friday PM",
             summary: "clear",
             wind: 25,
-            snow: null,
-            rain: null,
+            snow: 0,
+            rain: 0,
             freezingLevel: 3150
         },
         {
             time: "Friday night",
             summary: "clear",
             wind: 25,
-            snow: null,
-            rain: null,
+            snow: 0,
+            rain: 0,
             freezingLevel: 2500
         },
         {
             time: "Saturday AM",
             summary: "some clouds",
             wind: 25,
-            snow: null,
-            rain: null,
+            snow: 0,
+            rain: 0,
             freezingLevel: 2750
         }
     ]
