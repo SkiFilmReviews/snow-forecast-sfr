@@ -90,8 +90,8 @@ var SnowRequest = function() {
         time: TimeUtil.getTime(TimeUtil.getTimeOffset(firstTime), forecastOpt.startDay, i), //issued[1] is startDay
         summary: $(summary[i]).text(),
         wind: parseInt($(winds[i]).text(), 10),
-        snow: parseInt($(snowForecast[i]).text(), 10),
-        rain: parseInt($(rainForecast[i]).text(), 10),
+        snow: parseInt($(snowForecast[i]).text(), 10) || 0,
+        rain: parseInt($(rainForecast[i]).text(), 10) || 0,
         freezingLevel: parseInt($(freezingLevel[i]).text(),10)
       };
       //If units requested isn't what's returned, convert
