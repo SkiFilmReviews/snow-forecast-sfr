@@ -1,4 +1,4 @@
-# snow-forecast-sfr - V1.1.1
+# snow-forecast-sfr - V1.1.1 [![Build Status](https://travis-ci.org/SkiFilmReviews/snow-forecast-sfr.svg?branch=master)](https://travis-ci.org/SkiFilmReviews/snow-forecast-sfr)
 Source code for the npm module that scrapes snow-forecast.com. This is an unofficial scraper.
 
 ## Introduction
@@ -31,7 +31,7 @@ metric, or false for imperial.
 ## Sample JSON
 If it isn't expected to snow and/or rain then a - is input there. Otherwise the numerical value displayed on the site appears.
 
-```javascript
+```js
 {
     name: "Valle-Nevado",
     url: "http://www.snow-forecast.com/resorts/Valle-Nevado/6day/top",
@@ -203,6 +203,14 @@ parseResort takes three parameters, the name of the resort (as is found on snow-
 ### Caveats
 
 This is an unofficial module, and thus if snow-forecast decide to change the structure of their DOM then this will most likely break. We'll do our best to get it back up to scratch but caution beware. This issue affects all scrapers though.
+
+## Testing
+
+In order to run the suite of jasmine tests run the following code:
+
+```js
+npm test
+```
 
 ## Who uses this
 
