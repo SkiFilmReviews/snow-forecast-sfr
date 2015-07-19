@@ -19,9 +19,9 @@ UnitUtil = {
     *
     * returns: speed in kph, rounded up.
     */
-    seedToMetric: function(speed){
-      var kph = speed * this.TO_KPH;
-      return Math.round(kph*10)/10;
+    speedToMetric: function(speed){
+      var kph = speed / this.TO_KPH;
+      return Math.round(kph);
     },
 
     /**
@@ -33,8 +33,8 @@ UnitUtil = {
     * returns: speed in mph, rounded up.
     */
     speedToImperial: function(speed){
-      var mph = speed * this.TO_MPH;
-      return this.roundTo(10, Math.round(mph*10)/10);
+      var mph = speed / this.TO_MPH;
+      return this.roundTo(5, Math.round(mph));
     },
 
     /**
@@ -119,14 +119,14 @@ UnitUtil = {
     *  Nearest number to round to
     * value
     *
-    * returns: number that has been rounded up/down to specified multiple.   
+    * returns: number that has been rounded up/down to specified multiple.
     */
     roundTo: function(multiple, value){
-      var rem = value%multiple;
+      var rem = Math.round(value%multiple);
         if (rem <= (multiple/2)) {
-            return value-rem;
+            return Math.round(value-rem);
         } else {
-            return value+multiple-rem;
+            return Math.round(value+multiple-rem);
         }
     }
 };
