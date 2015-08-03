@@ -52,7 +52,7 @@ TimeUtil = {
     * returns: dayOffset: index of current day for specified column of forecast data.
     */
     getDayOffset: function(startDay, startTime, index){
-      var firstDayPos = this.days.indexOf(this.correctDay(startDay)); //get position of first day
+      var firstDayPos = this.days.indexOf(this.getCorrectDay(startDay)); //get position of first day
 
       //Black magic
       if(((startTime+index)/this.times.length)%1 === 0 && startTime+index !== 0){
@@ -70,7 +70,7 @@ TimeUtil = {
     *
     * returns: correctDay: The correctly formatted day to check against our index of days.
     */
-    correctDay: function(day){
+    getCorrectDay: function(day){
       //If length of day is sufficient, just trim
       if(day.length > this.MIN_DAY_STRING_LEN){
         return day.split(" ")[0].trim();
