@@ -71,6 +71,8 @@ var SnowRequest = function() {
     var rainForecast = $('span.rain');
     var freezingLevel = $('span.heightfl');
     var winds = $('table tr.winds td');
+    var maxTemp = $( $('table tr:nth-child(10) span.temp'));
+    var minTemp = $( $('table tr:nth-child(11) span.temp'));
     var summary = $('table tr.med.sum td');
 
     //Create forecast object, and init forecast array for later
@@ -92,7 +94,9 @@ var SnowRequest = function() {
         wind: parseInt($(winds[i]).text(), 10),
         snow: parseInt($(snowForecast[i]).text(), 10) || 0,
         rain: parseInt($(rainForecast[i]).text(), 10) || 0,
-        freezingLevel: parseInt($(freezingLevel[i]).text(),10)
+        freezingLevel: parseInt($(freezingLevel[i]).text(),10),
+        minTemp: parseInt($(minTemp[i]).text(), 10),
+        maxTemp: parseInt($(maxTemp[i]).text(), 10)
       };
       //If units requested isn't what's returned, convert
       if(forecastOpt.isMetric !== unitsInMetric){
@@ -117,11 +121,15 @@ var SnowRequest = function() {
       obj.snow = UnitUtil.volumeToMetric(obj.snow) || 0;
       obj.rain = UnitUtil.volumeToMetric(obj.rain/10) || 0;
       obj.freezingLevel = UnitUtil.distanceToMetric(obj.freezingLevel);
+      obj.minTemp = UnitUtil.temperatureToMetric(obj.minTemp);
+      obj.maxTemp = UnitUtil.temperatureToMetric(obj.maxTemp);
     } else {
       obj.wind = UnitUtil.speedToImperial(obj.wind);
       obj.snow = UnitUtil.volumeToImperial(obj.snow) || 0;
       obj.rain = UnitUtil.volumeToImperial(obj.rain/10) || 0;
       obj.freezingLevel = UnitUtil.distanceToImperial(obj.freezingLevel);
+      obj.minTemp = UnitUtil.temperatureToImperial(obj.minTemp);
+      obj.maxTemp = UnitUtil.temperatureToImperial(obj.maxTemp);
     }
     return obj;
   }

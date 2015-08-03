@@ -1,4 +1,4 @@
-# snow-forecast-sfr - V1.1.1 [![Build Status](https://travis-ci.org/SkiFilmReviews/snow-forecast-sfr.svg?branch=master)](https://travis-ci.org/SkiFilmReviews/snow-forecast-sfr)
+# snow-forecast-sfr - V1.2 [![Build Status](https://travis-ci.org/SkiFilmReviews/snow-forecast-sfr.svg?branch=master)](https://travis-ci.org/SkiFilmReviews/snow-forecast-sfr)
 Source code for the npm module that scrapes snow-forecast.com. This is an unofficial scraper.
 
 ## Introduction
@@ -33,157 +33,193 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
 
 ```js
 {
-    name: "Valle-Nevado",
-    url: "http://www.snow-forecast.com/resorts/Valle-Nevado/6day/top",
-    issuedDate: "1pm 12 Jul 2015",
-    elevation: "top",
-    units: "metric",
-    forecast: [
-        {
-            time: "Sunday PM",
-            summary: "heavy snow",
-            wind: 25,
-            snow: 28,
-            rain: 0,
-            freezingLevel: 2000
-        },
-        {
-            time: "Sunday night",
-            summary: "heavy snow",
-            wind: 10,
-            snow: 60,
-            rain: 0,
-            freezingLevel: 1600
-        },
-        {
-            time: "Monday AM",
-            summary: "snow shwrs",
-            wind: 10,
-            snow: 3,
-            rain: 0,
-            freezingLevel: 1700
-        },
-        {
-            time: "Monday PM",
-            summary: "snow shwrs",
-            wind: 20,
-            snow: 2,
-            rain: 0,
-            freezingLevel: 1600
-        },
-        {
-            time: "Monday night",
-            summary: "snow shwrs",
-            wind: 0,
-            snow: 2,
-            rain: 0,
-            freezingLevel: 1050
-        },
-        {
-            time: "Tuesday AM",
-            summary: "clear",
-            wind: 5,
-            snow: 0,
-            rain: 0,
-            freezingLevel: 1900
-        },
-        {
-            time: "Tuesday PM",
-            summary: "clear",
-            wind: 10,
-            snow: 0,
-            rain: 0,
-            freezingLevel: 1900
-        },
-        {
-            time: "Tuesday night",
-            summary: "clear",
-            wind: 0,
-            snow: 0,
-            rain: 0,
-            freezingLevel: 1700
-        },
-        {
-            time: "Wednesday AM",
-            summary: "snow shwrs",
-            wind: 10,
-            snow: 0,
-            rain: 0,
-            freezingLevel: 2350
-        },
-        {
-            time: "Wednesday PM",
-            summary: "light snow",
-            wind: 20,
-            snow: 1,
-            rain: 0,
-            freezingLevel: 2100
-        },
-        {
-            time: "Wednesday night",
-            summary: "light snow",
-            wind: 5,
-            snow: 1,
-            rain: 0,
-            freezingLevel: 2050
-        },
-        {
-            time: "Thursday AM",
-            summary: "some clouds",
-            wind: 10,
-            snow: 0,
-            rain: 0,
-            freezingLevel: 3100
-        },
-        {
-            time: "Thursday PM",
-            summary: "some clouds",
-            wind: 10,
-            snow: 0,
-            rain: 0,
-            freezingLevel: 3150
-        },
-        {
-            time: "Thursday night",
-            summary: "clear",
-            wind: 10,
-            snow: 0,
-            rain: 0,
-            freezingLevel: 2900
-        },
-        {
-            time: "Friday AM",
-            summary: "clear",
-            wind: 20,
-            snow: 0,
-            rain: 0,
-            freezingLevel: 3350
-        },
-        {
-            time: "Friday PM",
-            summary: "clear",
-            wind: 25,
-            snow: 0,
-            rain: 0,
-            freezingLevel: 3150
-        },
-        {
-            time: "Friday night",
-            summary: "clear",
-            wind: 25,
-            snow: 0,
-            rain: 0,
-            freezingLevel: 2500
-        },
-        {
-            time: "Saturday AM",
-            summary: "some clouds",
-            wind: 25,
-            snow: 0,
-            rain: 0,
-            freezingLevel: 2750
-        }
-    ]
+  name: "Valle-Nevado",
+  url: "http://www.snow-forecast.com/resorts/Valle-Nevado/6day/top",
+  issuedDate: "1pm 03 Aug 2015",
+  elevation: "top",
+  units: "metric",
+  forecast: [
+    {
+      time: "Monday PM",
+      summary: "light snow",
+      wind: 15,
+      snow: 4,
+      rain: 0,
+      freezingLevel: 3100,
+      minTemp: -4,
+      maxTemp: -4
+    },
+    {
+      time: "Monday night",
+      summary: "light snow",
+      wind: 15,
+      snow: 5,
+      rain: 0,
+      freezingLevel: 2800,
+      minTemp: -6,
+      maxTemp: -5
+    },
+    {
+      time: "Tuesday AM",
+      summary: "snow shwrs",
+      wind: 15,
+      snow: 0,
+      rain: 0,
+      freezingLevel: 3600,
+      minTemp: -5,
+      maxTemp: -1
+    },
+    {
+      time: "Tuesday PM",
+      summary: "snow shwrs",
+      wind: 10,
+      snow: 0,
+      rain: 0,
+      freezingLevel: 3600,
+      minTemp: -1,
+      maxTemp: 1
+    },
+    {
+      time: "Tuesday night",
+      summary: "light snow",
+      wind: 25,
+      snow: 5,
+      rain: 0,
+      freezingLevel: 3000,
+      minTemp: -5,
+      maxTemp: -2
+    },
+    {
+      time: "Wednesday AM",
+      summary: "heavy snow",
+      wind: 35,
+      snow: 13,
+      rain: 0,
+      freezingLevel: 2850,
+      minTemp: -5,
+      maxTemp: -5
+    },
+    {
+      time: "Wednesday PM",
+      summary: "heavy snow",
+      wind: 40,
+      snow: 15,
+      rain: 0,
+      freezingLevel: 2450,
+      minTemp: -7,
+      maxTemp: -5
+    },
+    {
+      time: "Wednesday night",
+      summary: "heavy snow",
+      wind: 30,
+      snow: 98,
+      rain: 0,
+      freezingLevel: 2400,
+      minTemp: -9,
+      maxTemp: -8
+    },
+    {
+      time: "Thursday AM",
+      summary: "heavy snow",
+      wind: 25,
+      snow: 58,
+      rain: 0,
+      freezingLevel: 2750,
+      minTemp: -8,
+      maxTemp: -6
+    },
+    {
+      time: "Thursday PM",
+      summary: "heavy snow",
+      wind: 45,
+      snow: 36,
+      rain: 0,
+      freezingLevel: 2900,
+      minTemp: -5,
+      maxTemp: -5
+    },
+    {
+      time: "Thursday night",
+      summary: "heavy snow",
+      wind: 45,
+      snow: 128,
+      rain: 0,
+      freezingLevel: 1900,
+      minTemp: -12,
+      maxTemp: -5
+    },
+    {
+      time: "Friday AM",
+      summary: "heavy snow",
+      wind: 40,
+      snow: 32,
+      rain: 0,
+      freezingLevel: 1850,
+      minTemp: -13,
+      maxTemp: -12
+    },
+    {
+      time: "Friday PM",
+      summary: "heavy snow",
+      wind: 35,
+      snow: 21,
+      rain: 0,
+      freezingLevel: 2050,
+      minTemp: -11,
+      maxTemp: -11
+    },
+    {
+      time: "Friday night",
+      summary: "heavy snow",
+      wind: 30,
+      snow: 32,
+      rain: 0,
+      freezingLevel: 1600,
+      minTemp: -14,
+      maxTemp: -12
+    },
+    {
+      time: "Saturday AM",
+      summary: "light snow",
+      wind: 30,
+      snow: 3,
+      rain: 0,
+      freezingLevel: 1900,
+      minTemp: -14,
+      maxTemp: -12
+    },
+    {
+      time: "Saturday PM",
+      summary: "light snow",
+      wind: 25,
+      snow: 3,
+      rain: 0,
+      freezingLevel: 2000,
+      minTemp: -11,
+      maxTemp: -11
+    },
+    {
+      time: "Saturday night",
+      summary: "light snow",
+      wind: 30,
+      snow: 4,
+      rain: 0,
+      freezingLevel: 1850,
+      minTemp: -12,
+      maxTemp: -12
+    },
+    {
+      time: "Sunday AM",
+      summary: "light snow",
+      wind: 25,
+      snow: 3,
+      rain: 0,
+      freezingLevel: 2150,
+      minTemp: -11,
+      maxTemp: -10
+    }
+  ]
 }
 ```
 

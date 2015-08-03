@@ -137,6 +137,14 @@ describe("handling being given a non-numerical string", function() {
     var rounded = unit.roundTo("ten", 20);
     expect(rounded).toBeNaN();
   });
+  it("should return NaN when given a non-numerical string", function() {
+    var temperature = unit.temperatureToMetric("bananarama");
+    expect(temperature).toBeNaN();
+  });
+  it("should return NaN when given a non-numerical string", function() {
+    var temperature = unit.temperatureToImperial("applepower");
+    expect(temperature).toBeNaN();
+  });
 });
 
 describe("handling being given an object", function() {
@@ -164,6 +172,14 @@ describe("handling being given an object", function() {
     var rounded = unit.roundTo({speed : 'ten'}, 5);
     expect(rounded).toBeNaN();
   });
+  it("should return NaN when given an object", function() {
+    var temperature = unit.temperatureToMetric({temperature : 'ten'}, 5);
+    expect(temperature).toBeNaN();
+  });
+  it("should return NaN when given an object", function() {
+    var temperature = unit.temperatureToImperial({temperature : 'three'}, 5);
+    expect(temperature).toBeNaN();
+  });
 });
 
 describe("handling being given a multi-dimensional array", function() {
@@ -183,42 +199,104 @@ describe("handling being given a multi-dimensional array", function() {
     var distance = unit.distanceToImperial([30, 20]);
     expect(distance).toBeNaN();
   });
-
-  describe("converting cm to inches", function() {
-    it("should return 1 inch when given 2.5cm", function() {
-      var volume = unit.volumeToImperial(2.5);
-      expect(volume).toBe(1);
-    });
-    it("should return 0.1 inch when given 0.25cm", function() {
-      var volume = unit.volumeToImperial(0.25);
-      expect(volume).toBe(0.1);
-    });
-    it("should return 3.1 inches when given 8cm", function() {
-      var volume = unit.volumeToImperial(8);
-      expect(volume).toBe(3.1);
-    });
-    it("should return 0 inch when given 0.1cm", function() {
-      var volume = unit.volumeToImperial(0.1);
-      expect(volume).toBe(0);
-    });
+  it("should return NaN when given an multi-element array", function() {
+    var temperature = unit.temperatureToMetric([10, 20]);
+    expect(temperature).toBeNaN();
   });
+  it("should return NaN when given an multi-element array", function() {
+    var temperature = unit.temperatureToImperial([0, 15]);
+    expect(temperature).toBeNaN();
+  });
+});
 
-  describe("converting inches to cm", function() {
-    it("should return 2.5cm when given 1 inch", function() {
-      var volume = unit.volumeToMetric(1);
-      expect(volume).toBe(2.5);
-    });
-    it("should return 0.5cm when given 0.2inch", function() {
-      var volume = unit.volumeToMetric(0.2);
-      expect(volume).toBe(0.5);
-    });
-    it("should return 10.2cm when given 4inches", function() {
-      var volume = unit.volumeToMetric(4);
-      expect(volume).toBe(10.2);
-    });
-    it("should return 0.3cm when given 0.1inch", function() {
-      var volume = unit.volumeToMetric(0.1);
-      expect(volume).toBe(0.3);
-    });
+describe("converting cm to inches", function() {
+  it("should return 1 inch when given 2.5cm", function() {
+    var volume = unit.volumeToImperial(2.5);
+    expect(volume).toBe(1);
+  });
+  it("should return 0.1 inch when given 0.25cm", function() {
+    var volume = unit.volumeToImperial(0.25);
+    expect(volume).toBe(0.1);
+  });
+  it("should return 3.1 inches when given 8cm", function() {
+    var volume = unit.volumeToImperial(8);
+    expect(volume).toBe(3.1);
+  });
+  it("should return 0 inch when given 0.1cm", function() {
+    var volume = unit.volumeToImperial(0.1);
+    expect(volume).toBe(0);
+  });
+});
+
+describe("converting inches to cm", function() {
+  it("should return 2.5cm when given 1 inch", function() {
+    var volume = unit.volumeToMetric(1);
+    expect(volume).toBe(2.5);
+  });
+  it("should return 0.5cm when given 0.2inch", function() {
+    var volume = unit.volumeToMetric(0.2);
+    expect(volume).toBe(0.5);
+  });
+  it("should return 10.2cm when given 4inches", function() {
+    var volume = unit.volumeToMetric(4);
+    expect(volume).toBe(10.2);
+  });
+  it("should return 0.3cm when given 0.1inch", function() {
+    var volume = unit.volumeToMetric(0.1);
+    expect(volume).toBe(0.3);
+  });
+});
+
+describe("converting degrees celcius to fahrenheit", function(){
+  it("should return 32 when given 0", function(){
+    var temperature = unit.temperatureToImperial(0);
+    expect(temperature).toBe(32);
+  });
+  it("should return 27 when given -3", function(){
+    var temperature = unit.temperatureToImperial(-3);
+    expect(temperature).toBe(27);
+  });
+  it("should return -4 when given -20", function(){
+    var temperature = unit.temperatureToImperial(-20);
+    expect(temperature).toBe(-4);
+  });
+  it("should return 0 when given -18", function(){
+    var temperature = unit.temperatureToImperial(-18);
+    expect(temperature).toBe(0);
+  });
+  it("should return 64 when given 18", function(){
+    var temperature = unit.temperatureToImperial(18);
+    expect(temperature).toBe(64);
+  });
+  it("should return 41 when given 5", function(){
+    var temperature = unit.temperatureToImperial(5);
+    expect(temperature).toBe(41);
+  });
+});
+
+describe("converting degrees fahrenheit to celcius", function(){
+  it("should return -18 when given 0", function(){
+    var temperature = unit.temperatureToMetric(0);
+    expect(temperature).toBe(-18);
+  });
+  it("should return -7 when given 20", function(){
+    var temperature = unit.temperatureToMetric(20);
+    expect(temperature).toBe(-7);
+  });
+  it("should return 1 when given 33", function(){
+    var temperature = unit.temperatureToMetric(33);
+    expect(temperature).toBe(1);
+  });
+  it("should return 4 when given 39", function(){
+    var temperature = unit.temperatureToMetric(39);
+    expect(temperature).toBe(4);
+  });
+  it("should return -11 when given 12", function(){
+    var temperature = unit.temperatureToMetric(12);
+    expect(temperature).toBe(-11);
+  });
+  it("should return -5 when given 23", function(){
+    var temperature = unit.temperatureToMetric(23);
+    expect(temperature).toBe(-5);
   });
 });

@@ -94,7 +94,8 @@ UnitUtil = {
     * returns: temperature in degrees celcius rounded up.
     */
     temperatureToMetric: function(temp){
-      return this.roundTo(1,Math.round( temp *(9/5) + 32)/10);
+      var temperature = (temp-32)*5/9;
+      return this.roundTo(1, Math.round(temperature));
     },
 
     /**
@@ -106,7 +107,8 @@ UnitUtil = {
     * returns: temperature in fahrenheit rounded up.
     */
     temperatureToImperial: function(temp){
-      return this.roundTo(1, Math.round( (temp -32) * (5/9))/10);
+      var temperature = (temp*9)/5 +32;
+      return this.roundTo(1, Math.round(temperature));
     },
 
     /**
