@@ -26,12 +26,13 @@ var SnowRequest = function() {
           if(html.length < 1500 && html.indexOf('The page you were looking for doesn\'t exist') > -1){
             cb(['Invalid page(404)', 'Unable to find relevant resort forecast, ' +
               'please check the spelling and try again', url]);
+              return;
           }
           $ = cheerio.load(html); //Load html using cheerio for parsing
+          cb($);
         } catch(ex){
             cb(['Parse error', ex, url]);
         }
-        cb($);
       } else {
         cb(['Remote server error', 'Unable to get response from snow-forecast' + error, url]);
       }
@@ -156,6 +157,9 @@ var SnowRequest = function() {
   * opts: Hash of available runtime option parameters
   */
   snowRequest.parseResort = function(resortName, elevation, cb, opts){
+    if(arguments.length < 3){
+      return pBuildErrorJSON('Insufficient parameters', 'Please pass the resort, elevation, callback and if you wish the options object into the method', '');
+    }
     pApplyOptions(opts);
     var url = coreURL + resortName + '/6day/' + elevation; //Build the url
 
