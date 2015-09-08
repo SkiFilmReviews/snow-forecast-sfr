@@ -90,6 +90,7 @@ var SnowRequest = function() {
     //Loop over forecasts, get relevant information for each and push to temp array
     for(var i = 0; i < MAX_CELLS; i++){
       var cellObj = {
+        date: TimeUtil.getDay(forecastOpt.issuedDate, forecastOpt.startDay, TimeUtil.getTimeOffset(firstTime), i),
         time: TimeUtil.getTime(TimeUtil.getTimeOffset(firstTime), forecastOpt.startDay, i), //issued[1] is startDay
         summary: $(summary[i]).text(),
         wind: parseInt($(winds[i]).text(), 10),
@@ -99,6 +100,7 @@ var SnowRequest = function() {
         minTemp: parseInt($(minTemp[i]).text(), 10),
         maxTemp: parseInt($(maxTemp[i]).text(), 10)
       };
+
       //If units requested isn't what's returned, convert
       if(forecastOpt.isMetric !== unitsInMetric){
         cellObj = pConvertUnits(cellObj, unitsInMetric);

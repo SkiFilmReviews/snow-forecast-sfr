@@ -3,7 +3,7 @@
  * forecast are so the returned JSON object is correct. Works regardless of device's
  * timezone.
  */
-
+var moment = require('moment');
 TimeUtil = {
     times: ['AM', 'PM', 'night'],
     days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
@@ -59,6 +59,22 @@ TimeUtil = {
         this.currentDayOffset++;
       }
       return (firstDayPos + this.currentDayOffset) % this.days.length;
+    },
+
+    /*
+    * PUBLIC
+    * Helper method that uses the Moment API to get the day of
+    * the current forecast cell.
+    * issuedDate: The date when the forecast was issued.
+    * startDay: The first day in the snow forecast.
+    * startTime: The first time in the snow forecast.
+    * index: Current index, ranges from 0 to MAX_INDEX_CNT(17).
+    *
+    * returns: day: string object e.g. 8th Sep 2015
+    */
+    getDay: function(issuedDate, startDay, startTime, index){
+      var offset = Math.floor((startTime + index)/this.times.length);
+      return moment().add(offset, 'days').format("Do MMM YY");
     },
 
     /*
