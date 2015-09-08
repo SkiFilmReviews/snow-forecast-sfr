@@ -29,7 +29,6 @@ metric, or false for imperial.
 
 
 ## Sample JSON
-If it isn't expected to snow and/or rain then a - is input there. Otherwise the numerical value displayed on the site appears.
 
 ```js
 {
@@ -40,6 +39,7 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
   units: "metric",
   forecast: [
     {
+      date: '3rd Aug 15',
       time: "Monday PM",
       summary: "light snow",
       wind: 15,
@@ -50,6 +50,7 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
       maxTemp: -4
     },
     {
+      date: '3rd Aug 15',
       time: "Monday night",
       summary: "light snow",
       wind: 15,
@@ -60,6 +61,7 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
       maxTemp: -5
     },
     {
+      date: '4th Aug 15',
       time: "Tuesday AM",
       summary: "snow shwrs",
       wind: 15,
@@ -70,6 +72,7 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
       maxTemp: -1
     },
     {
+      date: '4th Aug 15',
       time: "Tuesday PM",
       summary: "snow shwrs",
       wind: 10,
@@ -80,6 +83,7 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
       maxTemp: 1
     },
     {
+      date: '4th Aug 15',
       time: "Tuesday night",
       summary: "light snow",
       wind: 25,
@@ -90,6 +94,7 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
       maxTemp: -2
     },
     {
+      date: '5th Aug 15',
       time: "Wednesday AM",
       summary: "heavy snow",
       wind: 35,
@@ -100,6 +105,7 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
       maxTemp: -5
     },
     {
+      date: '5th Aug 15',
       time: "Wednesday PM",
       summary: "heavy snow",
       wind: 40,
@@ -110,6 +116,7 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
       maxTemp: -5
     },
     {
+      date: '5th Aug 15',
       time: "Wednesday night",
       summary: "heavy snow",
       wind: 30,
@@ -120,6 +127,7 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
       maxTemp: -8
     },
     {
+      date: '6th Aug 15',
       time: "Thursday AM",
       summary: "heavy snow",
       wind: 25,
@@ -130,6 +138,7 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
       maxTemp: -6
     },
     {
+      date: '6th Aug 15',
       time: "Thursday PM",
       summary: "heavy snow",
       wind: 45,
@@ -140,6 +149,7 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
       maxTemp: -5
     },
     {
+      date: '6th Aug 15',
       time: "Thursday night",
       summary: "heavy snow",
       wind: 45,
@@ -150,6 +160,7 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
       maxTemp: -5
     },
     {
+      date: '7th Aug 15',
       time: "Friday AM",
       summary: "heavy snow",
       wind: 40,
@@ -160,6 +171,7 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
       maxTemp: -12
     },
     {
+      date: '7th Aug 15',
       time: "Friday PM",
       summary: "heavy snow",
       wind: 35,
@@ -170,6 +182,7 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
       maxTemp: -11
     },
     {
+      date: '7th Aug 15',
       time: "Friday night",
       summary: "heavy snow",
       wind: 30,
@@ -180,6 +193,7 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
       maxTemp: -12
     },
     {
+      date: '8th Aug 15',
       time: "Saturday AM",
       summary: "light snow",
       wind: 30,
@@ -190,6 +204,7 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
       maxTemp: -12
     },
     {
+      date: '8th Aug 15',
       time: "Saturday PM",
       summary: "light snow",
       wind: 25,
@@ -200,6 +215,7 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
       maxTemp: -11
     },
     {
+      date: '8th Aug 15',
       time: "Saturday night",
       summary: "light snow",
       wind: 30,
@@ -210,6 +226,7 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
       maxTemp: -12
     },
     {
+      date: '9th Aug 15',
       time: "Sunday AM",
       summary: "light snow",
       wind: 25,
@@ -228,9 +245,10 @@ If it isn't expected to snow and/or rain then a - is input there. Otherwise the 
 
 ### API
 
-parseResort takes three parameters, the name of the resort (as is found on snow-forecast.com), the elevation (low, mid or top), a callback where you specify what to do with the returned object and an options object where you can specify the units.
+parseResort takes three parameters, the name of the resort (as is found on snow-forecast.com), the elevation ('low', 'mid' or 'top'), a callback where you specify what to do with the returned object and an optional options object where you can specify the units.
 
 ### Types of Errors
+* Insufficient parameters - You haven't passed the proper number of parameters into the parseResort method.
 * Invalid page 404 - snow-forecast.com returned a 404, usually because the resort name you gave differs to how it's used on snow-forecast.com
 * Remote server error - Unable to connect to snow-forecast.com. Check whether the network is operating properly. Alternatively, the site may be down.
 * Parse error - The parsing has failed. This should never happen.
@@ -257,7 +275,7 @@ Currently this is used by [Niseko Pow](http://www.nisekopow.com). If you do use 
 We rely on the following npm modules:
 * [Cheerio](https://github.com/cheeriojs/cheerio)
 * [Request](https://github.com/request/request)
-
+* [Moment](https://github.com/moment/moment/)
 
 ## Future Features
 
