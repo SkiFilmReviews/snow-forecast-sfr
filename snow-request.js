@@ -94,6 +94,7 @@ var SnowRequest = function() {
         time: TimeUtil.getTime(TimeUtil.getTimeOffset(firstTime), forecastOpt.startDay, i), //issued[1] is startDay
         summary: $(summary[i]).text(),
         wind: parseInt($(winds[i]).text(), 10),
+        windDirection: pGetWindDirection($, winds[i]),
         snow: parseInt($(snowForecast[i]).text(), 10) || 0,
         rain: parseInt($(rainForecast[i]).text(), 10) || 0,
         freezingLevel: parseInt($(freezingLevel[i]).text(),10),
@@ -109,6 +110,32 @@ var SnowRequest = function() {
     }
     forecastObj.forecast = forecastArr;
     cb(forecastObj);
+  }
+
+
+  /*
+  * Helper method that finds if a wind cell has an image with an alternate text
+  * value. This is used as it is the only place where we can get the wind direction
+  * from.
+  *
+  * If it fails to find one it will return an empty string.
+  * cell
+  *   The HTMLElement holding for the wind.
+  */
+  function pGetWindDirection($, cell){
+      var img = $(cell).find('img');
+      var windDirectionString = '';
+      var maxDescriptionParts = 2;
+      if(img && img.length > 0) {
+        var imageCellAlt = $(img[0]).attr('alt');
+
+        //We don't want the speed just direction, so split string and get last part
+        if(imageCellAlt && imageCellAlt.split(' ').length == maxDescriptionParts) {
+          windDirectionString = imageCellAlt.split(' ')[1];
+        }
+      }
+
+      return windDirectionString;
   }
 
   /*

@@ -99,6 +99,14 @@ describe("parsing Tignes at top should return valid forecast objects", function(
       done();
     });
   });
+  it("should have wind direction that is not an empty string and has no numbers", function(done){
+      var result = request.parseResort('Tignes', 'top', function(result){
+        expect(typeof result.forecast[3].windDirection === 'string').toBeTruthy();
+        expect(result.forecast[3].windDirection.match(/\d+/g)).toBeNull();
+        expect(result.forecast[3].windDirection.length > 0);
+        done();
+      });
+  });
   it("should have rain that is an integer and >= 0", function(done){
     var result = request.parseResort('Tignes', 'top', function(result){
       expect(isNaN(result.forecast[5].wind)).toBeFalsy();
