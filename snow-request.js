@@ -72,8 +72,8 @@ var SnowRequest = function() {
     var rainForecast = $('span.rain');
     var freezingLevel = $('span.heightfl');
     var winds = $('table tr.winds td');
-    var maxTemp = $( $('table tr:nth-child(10) span.temp'));
-    var minTemp = $( $('table tr:nth-child(11) span.temp'));
+    var maxTemp = $( $('table tr:nth-child(11) span.temp'));
+    var minTemp = $( $('table tr:nth-child(12) span.temp'));
     var summary = $('table tr.med.sum td');
 
     //Create forecast object, and init forecast array for later
