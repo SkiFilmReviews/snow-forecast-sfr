@@ -72,8 +72,25 @@ var SnowRequest = function() {
     var rainForecast = $('span.rain');
     var freezingLevel = $('span.heightfl');
     var winds = $('table tr.winds td');
-    var maxTemp = $( $('table tr:nth-child(11) span.temp'));
-    var minTemp = $( $('table tr:nth-child(12) span.temp'));
+
+    var maxTempContainer = null;
+    var minTempContainer = null;
+
+    // Allows us a more flexible way of ensuring that we get temps rather than hard-coding a number
+    var rowTypes = $('.h-words').toArray();
+    for(var i = 0; i < rowTypes.length; i++) {
+      var item = $(rowTypes[i]);
+      var text = item.text();
+      // An ugly way of going up to the tr level so we can search for the temps within
+      if (text.toLowerCase().includes('min')) {
+        minTempContainer = item.parent().parent();
+      } else if (text.toLowerCase().includes('max')) {
+        maxTempContainer = item.parent().parent();
+      }
+    }
+
+    var maxTemp = $(maxTempContainer).find('span.temp');
+    var minTemp = $(minTempContainer).find('span.temp');
     var summary = $('table tr.med.sum td');
 
     //Create forecast object, and init forecast array for later
