@@ -73,6 +73,7 @@ var SnowRequest = function() {
     var freezingLevel = $('span.heightfl');
     var winds = $('table tr.winds td');
 
+    var windChillTempContainer = null;
     var maxTempContainer = null;
     var minTempContainer = null;
 
@@ -80,17 +81,20 @@ var SnowRequest = function() {
     var rowTypes = $('.h-words').toArray();
     for(var i = 0; i < rowTypes.length; i++) {
       var item = $(rowTypes[i]);
-      var text = item.text();
+      var text = item.text().toLowerCase();
       // An ugly way of going up to the tr level so we can search for the temps within
-      if (text.toLowerCase().includes('min')) {
+      if (text.includes('min')) {
         minTempContainer = item.parent().parent();
-      } else if (text.toLowerCase().includes('max')) {
+      } else if (text.includes('max')) {
         maxTempContainer = item.parent().parent();
+      } else if (text.includes('chill')) {
+        windChillTempContainer = item.parent().parent();
       }
     }
 
     var maxTemp = $(maxTempContainer).find('span.temp');
     var minTemp = $(minTempContainer).find('span.temp');
+    var windChill = $(windChillTempContainer).find('span.temp');
     var summary = $('table tr.med.sum td');
 
     //Create forecast object, and init forecast array for later
@@ -116,7 +120,8 @@ var SnowRequest = function() {
         rain: parseInt($(rainForecast[i]).text(), 10) || 0,
         freezingLevel: parseInt($(freezingLevel[i]).text(),10),
         minTemp: parseInt($(minTemp[i]).text(), 10),
-        maxTemp: parseInt($(maxTemp[i]).text(), 10)
+        maxTemp: parseInt($(maxTemp[i]).text(), 10),
+        windChill: parseInt($(windChill[i]).text(), 10)
       };
 
       //If units requested isn't what's returned, convert

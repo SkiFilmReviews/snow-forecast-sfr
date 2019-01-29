@@ -140,4 +140,10 @@ describe("parsing Tignes at top should return valid forecast objects", function(
       done();
     });
   });
+  it("should have a wind chill that is an integer", function(done){
+    var result = request.parseResort('Tignes', 'top', function(result){
+      expect(isNaN(result.forecast[10].windChill)).toBeFalsy();
+      done();
+    });
+  });
 });

@@ -1,4 +1,4 @@
-# snow-forecast-sfr - V1.5.1 [![Build Status](https://travis-ci.org/SkiFilmReviews/snow-forecast-sfr.svg?branch=master)](https://travis-ci.org/SkiFilmReviews/snow-forecast-sfr)
+# snow-forecast-sfr - V1.6.0 [![Build Status](https://travis-ci.org/SkiFilmReviews/snow-forecast-sfr.svg?branch=master)](https://travis-ci.org/SkiFilmReviews/snow-forecast-sfr)
 Source code for the npm module that scrapes snow-forecast.com. This is an unofficial scraper.
 
 ## Introduction
@@ -48,7 +48,8 @@ metric, or false for imperial.
       rain: 0,
       freezingLevel: 1750,
       minTemp: -16,
-      maxTemp: -13
+      maxTemp: -13,
+      windChill: -25
     },
     {
       date: "4th Jun 16",
@@ -60,7 +61,8 @@ metric, or false for imperial.
       rain: 0,
       freezingLevel: 1650,
       minTemp: -13,
-      maxTemp: -12
+      maxTemp: -12,
+      windChill: -25
     },
     {
       date: "4th Jun 16",
@@ -72,7 +74,8 @@ metric, or false for imperial.
       rain: 0,
       freezingLevel: 1350,
       minTemp: -16,
-      maxTemp: -15
+      maxTemp: -15,
+      windChill: -27
     },
     {
       date: "5th Jun 16",
@@ -84,7 +87,8 @@ metric, or false for imperial.
       rain: 0,
       freezingLevel: 1750,
       minTemp: -16,
-      maxTemp: -13
+      maxTemp: -13,
+      windChill: -20
     },
     {
       date: "5th Jun 16",
@@ -96,7 +100,8 @@ metric, or false for imperial.
       rain: 0,
       freezingLevel: 1650,
       minTemp: -13,
-      maxTemp: -13
+      maxTemp: -13,
+      windChill: -15
     },
     {
       date: "5th Jun 16",
@@ -108,7 +113,8 @@ metric, or false for imperial.
       rain: 0,
       freezingLevel: 1250,
       minTemp: -16,
-      maxTemp: -14
+      maxTemp: -14,
+      windChill: -18
     },
     {
       date: "6th Jun 16",
@@ -120,7 +126,8 @@ metric, or false for imperial.
       rain: 0,
       freezingLevel: 2250,
       minTemp: -13,
-      maxTemp: -9
+      maxTemp: -9,
+      windChill: -14
     },
     {
       date: "6th Jun 16",
@@ -132,7 +139,8 @@ metric, or false for imperial.
       rain: 0,
       freezingLevel: 2200,
       minTemp: -9,
-      maxTemp: -8
+      maxTemp: -8,
+      windChill: -10
     },
     {
       date: "6th Jun 16",
@@ -144,7 +152,8 @@ metric, or false for imperial.
       rain: 0,
       freezingLevel: 2150,
       minTemp: -10,
-      maxTemp: -9
+      maxTemp: -9,
+      windChill: -10
     },
     {
       date: "7th Jun 16",
@@ -156,7 +165,8 @@ metric, or false for imperial.
       rain: 0,
       freezingLevel: 2700,
       minTemp: -10,
-      maxTemp: -6
+      maxTemp: -6,
+      windChill: -11
     },
     {
       date: "7th Jun 16",
@@ -168,7 +178,8 @@ metric, or false for imperial.
       rain: 0,
       freezingLevel: 2600,
       minTemp: -7,
-      maxTemp: -6
+      maxTemp: -6,
+      windChill: -8
     },
     {
       date: "7th Jun 16",
@@ -180,7 +191,8 @@ metric, or false for imperial.
       rain: 0,
       freezingLevel: 2350,
       minTemp: -9,
-      maxTemp: -9
+      maxTemp: -9,
+      windChill: -9
     },
     {
       date: "8th Jun 16",
@@ -192,7 +204,8 @@ metric, or false for imperial.
       rain: 0,
       freezingLevel: 2900,
       minTemp: -9,
-      maxTemp: -5
+      maxTemp: -5,
+      windChill: -9
     },
     {
       date: "8th Jun 16",
@@ -204,7 +217,8 @@ metric, or false for imperial.
       rain: 0,
       freezingLevel: 2550,
       minTemp: -8,
-      maxTemp: -5
+      maxTemp: -5,
+      windChill: -9
     },
     {
       date: "8th Jun 16",
@@ -216,7 +230,8 @@ metric, or false for imperial.
       rain: 0,
       freezingLevel: 2000,
       minTemp: -11,
-      maxTemp: -10
+      maxTemp: -10,
+      windChill: -13
     },
     {
       date: "9th Jun 16",
@@ -228,7 +243,8 @@ metric, or false for imperial.
       rain: 0,
       freezingLevel: 2650,
       minTemp: -10,
-      maxTemp: -7
+      maxTemp: -7,
+      windChill: -15
     },
     {
       date: "9th Jun 16",
@@ -240,7 +256,8 @@ metric, or false for imperial.
       rain: 0,
       freezingLevel: 2050,
       minTemp: -10,
-      maxTemp: -7
+      maxTemp: -7,
+      windChill: -12
     },
     {
       date: "9th Jun 16",
@@ -252,7 +269,8 @@ metric, or false for imperial.
       rain: 0,
       freezingLevel: 2050,
       minTemp: -12,
-      maxTemp: -11
+      maxTemp: -11,
+      windChill: -14
     }
   ]
 }
