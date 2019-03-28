@@ -1,4 +1,4 @@
-# snow-forecast-sfr - V1.6.0 [![Build Status](https://travis-ci.org/SkiFilmReviews/snow-forecast-sfr.svg?branch=master)](https://travis-ci.org/SkiFilmReviews/snow-forecast-sfr)
+# snow-forecast-sfr - V1.6.1 [![Build Status](https://travis-ci.org/SkiFilmReviews/snow-forecast-sfr.svg?branch=master)](https://travis-ci.org/SkiFilmReviews/snow-forecast-sfr)
 Source code for the npm module that scrapes snow-forecast.com. This is an unofficial scraper.
 
 ## Introduction
@@ -302,9 +302,6 @@ In order to run the suite of jasmine tests run the following code:
 npm test
 ```
 
-## Who uses this
-
-Currently this is used by [Niseko Pow](http://www.nisekopow.com). If you do use this please let us know and we'll put your name up here.
 
 ## Our Dependencies
 
