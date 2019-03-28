@@ -231,7 +231,7 @@ var SnowRequest = function() {
       //Find out if response is in metric or not.
       forecastOptObj.isMetric = $('.deg-c input').attr('checked') === 'checked';
       //Extrapolate time-relevant information needed to build forecast, and build object.
-      var issued = TimeUtil.fixIssueDateFormat($('div.forecast-mid-header em nobr').text());
+      var issued = TimeUtil.fixIssueDateFormat($($('.location-issued__no-wrap')[6]).text() + $($('.location-issued__no-wrap')[7]).text());
       forecastOptObj.issuedDate = issued;
       forecastOptObj.startDay = $($('table tr.day-names td')[0]).text();
       var match = issued.match(/^\d+/);
