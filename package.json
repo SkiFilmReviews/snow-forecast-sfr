@@ -26,9 +26,9 @@
   "author": "Mike Spitz <mike@skifilmreviews.com> (http://github.com/MikeSpitz)",
   "license": "MIT",
   "dependencies": {
-    "cheerio": "^0.19.0",
-    "request": "^2.55.0",
-    "moment": "^2.10.6"
+    "cheerio": "^0.22.0",
+    "moment": "^2.10.6",
+    "request": "^2.55.0"
   },
   "devDependencies": {
     "jasmine-node": "^1.14.5"
