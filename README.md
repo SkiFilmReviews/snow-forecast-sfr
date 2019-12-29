@@ -1,4 +1,4 @@
-# snow-forecast-sfr - V1.6.3 [![Build Status](https://travis-ci.org/SkiFilmReviews/snow-forecast-sfr.svg?branch=master)](https://travis-ci.org/SkiFilmReviews/snow-forecast-sfr)
+# snow-forecast-sfr - V1.7.0 [![Build Status](https://travis-ci.org/SkiFilmReviews/snow-forecast-sfr.svg?branch=master)](https://travis-ci.org/SkiFilmReviews/snow-forecast-sfr)
 Source code for the npm module that scrapes snow-forecast.com. This is an unofficial scraper.
 
 ## Introduction
