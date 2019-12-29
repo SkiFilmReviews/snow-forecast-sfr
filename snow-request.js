@@ -219,10 +219,9 @@ var SnowRequest = function() {
       var issued = TimeUtil.fixIssueDateFormat($($('.location-issued__no-wrap')[5]).text() + $($('.location-issued__no-wrap')[6]).text());
 
       forecastOptObj.issuedDate = issued;
-      let lastUpdateDate = $($('.location-issued__no-wrap')[6]).text() 
       let firstTime = $($('.forecast-table-time__period')[0]).text();
       forecastOptObj.startDay = $($('.forecast-table-days__name')[0]).text();
-      forecastOptObj.lastUpdateDate = lastUpdateDate;
+      forecastOptObj.lastUpdateDate = $($('.location-issued__no-wrap')[6]).text();
       //if the first column starts from 'night', first column would not display day.
       if(firstTime === 'night'){
         forecastOptObj.startDay = TimeUtil.getPrevDay(forecastOptObj.startDay);
