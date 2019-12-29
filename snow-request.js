@@ -67,7 +67,7 @@ var SnowRequest = function() {
   */
   function pBuildForecast($, forecastOpt, cb) {
     //Get various forecast information containers
-    var firstTime = $($('table tr.lar.hea2 td span.tiny.en')[0]).text();
+    var firstTime = $($('.forecast-table-time__period')[0]).text();
     var snowForecast = $('span.snow');
     var rainForecast = $('span.rain');
     var freezingLevel = $('span.heightfl');
@@ -96,7 +96,7 @@ var SnowRequest = function() {
     //Loop over forecasts, get relevant information for each and push to temp array
     for(var i = 0; i < MAX_CELLS; i++){
       var cellObj = {
-        date: TimeUtil.getDay(forecastOpt.issuedDate, forecastOpt.startDay, TimeUtil.getTimeOffset(firstTime), i),
+        date: TimeUtil.getDay(forecastOpt.lastUpdateDate, forecastOpt.startDay, TimeUtil.getTimeOffset(firstTime), i),
         time: TimeUtil.getTime(TimeUtil.getTimeOffset(firstTime), forecastOpt.startDay, i), //issued[1] is startDay
         summary: $(summary[i]).text(),
         wind: parseInt($(winds[i]).text(), 10),
@@ -217,8 +217,17 @@ var SnowRequest = function() {
       forecastOptObj.isMetric = $('.deg-c input').attr('checked') === 'checked';
       //Extrapolate time-relevant information needed to build forecast, and build object.
       var issued = TimeUtil.fixIssueDateFormat($($('.location-issued__no-wrap')[5]).text() + $($('.location-issued__no-wrap')[6]).text());
+
       forecastOptObj.issuedDate = issued;
-      forecastOptObj.startDay = $($('table tr.day-names td')[0]).text();
+      let lastUpdateDate = $($('.location-issued__no-wrap')[6]).text() 
+      let firstTime = $($('.forecast-table-time__period')[0]).text();
+      forecastOptObj.startDay = $($('.forecast-table-days__name')[0]).text();
+      forecastOptObj.lastUpdateDate = lastUpdateDate;
+      //if the first column starts from 'night', first column would not display day.
+      if(firstTime === 'night'){
+        forecastOptObj.startDay = TimeUtil.getPrevDay(forecastOptObj.startDay);
+      }
+
       var match = issued.match(/^\d+/);
       var time = [];
       var timeIndex = issued.indexOf(match[0]) + match[0].length;

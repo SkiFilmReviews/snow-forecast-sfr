@@ -65,16 +65,17 @@ TimeUtil = {
     * PUBLIC
     * Helper method that uses the Moment API to get the day of
     * the current forecast cell.
-    * issuedDate: The date when the forecast was issued.
+    * lastUpdateDate: The date when the forecast was last updated. Ex. '28 Dec 2019'
     * startDay: The first day in the snow forecast.
     * startTime: The first time in the snow forecast.
     * index: Current index, ranges from 0 to MAX_INDEX_CNT(17).
     *
     * returns: day: string object e.g. 8th Sep 2015
     */
-    getDay: function(issuedDate, startDay, startTime, index){
+    getDay: function(lastUpdateDate, startDay, startTime, index){
       var offset = Math.floor((startTime + index)/this.times.length);
-      return moment().add(offset, 'days').format("Do MMM YY");
+      let issueDateObj = moment(lastUpdateDate, "DD-MMM-YYYY");
+      return issueDateObj.add(offset, 'days').format("Do MMM YY");
     },
 
     /*
@@ -115,7 +116,23 @@ TimeUtil = {
 
       return tmpDate[0] + tmpDate[1].trim() + ' ' + tmpDate[2] + ' ' + tmpDate[3].trim() +
         ' ' + tmpDate[4];
+    },
+    
+    /*
+    * PUBLIC
+    * Helper function to get the previous day of the week given a day
+    * input would always be complete word since it would have enough space to display it in the second column.
+    * This function does not support abbreviation input
+    * 
+    * startDay: the day when the first column starts on, ex. 'Monday'
+    * 
+    * returns: a string ie: 'Sunday'
+    */
+    getPrevDay: function(startDay){
+      index = this.days.indexOf(startDay);
+      return index === 0? this.days[6] : this.days[index-1];
     }
+
 };
 
 module.exports = TimeUtil;
