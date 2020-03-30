@@ -1,7 +1,14 @@
 export type TElevation = 'bot' | 'mid' | 'top';
-export type TDays = 'Sunday' | 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday';
+export type TDay = 'Sunday' | 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday';
+export type TTimePeriods = 'AM' | 'PM' | 'night';
 export type TUnits = 'metric' | 'imperial';
 export type TWindDirection = '';
+export type TIssuedDate = string;
+export type TUrl = string;
+export type TResortName = string;
+
+export type TSnowRequestError = string;
+export type TSnowRequestMessage = string;
 
 export interface ISnowRequest {
   parseResort: (
@@ -28,7 +35,7 @@ export interface IForecastRequest {
   elevation: TElevation;
   issuedDate: TIssuedDate;
   lastUpdateDate: string;
-  startDay: TDays;
+  startDay: TDay;
   isMetric: boolean;
 }
 
@@ -55,9 +62,17 @@ export interface IForecast {
   forecast: [IForecastCell?];
 }
 
-export type TIssuedDate = string;
-export type TUrl = string;
-export type TResortName = string;
-
-export type TSnowRequestError = string;
-export type TSnowRequestMessage = string;
+export interface ITimeUtil {
+  times: TTimePeriods[];
+  days: TDay[];
+  currentDayOffset: number;
+  MIN_DAY_STRING_LEN: number;
+  MAX_INDEX_CNT: number;
+  getTime: (timePeriodIndex: number, startDay: string, index: number) => string;
+  getTimeOffset: (startTime: TTimePeriods) => number;
+  getDayOffset: (startDay: string, timePeriodIndex: number, index: number) => number;
+  getDay: (lastUpdateDate: string, timePeriodIndex: number, index: number) => string;
+  getCorrectDay: (day: string) => TDay;
+  fixIssueDateFormat: (issuedDate: string) => string;
+  getPrevDay: (startDay: TDay) => TDay;
+};

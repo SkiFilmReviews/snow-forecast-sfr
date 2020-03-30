@@ -6,22 +6,21 @@ import {
   IForecastRequest,
   IParseOptions,
   IRequestError,
-  ISnowRequest, TDays,
+  ISnowRequest, TDay,
   TElevation, TResortName, TSnowRequestError,
-  TSnowRequestMessage,
+  TSnowRequestMessage, TTimePeriods,
   TUrl,
   TWindDirection,
 } from './types';
 
-const stringStream = bent('string');
+import TimeUtil from './utils/time-util';
 
-const TimeUtil = require('./time-util.js');
-const UnitUtil = require('./unit-util.js');
-const Elevation = require('./elevation.js');
+const stringStream = bent('string');
+const UnitUtil = require('../unit-util');
 
 
 const SnowRequest = function(): ISnowRequest {
-  const coreURL = 'http://www.snow-forecast.com/resorts/';
+  const coreURL = 'https://www.snow-forecast.com/resorts/';
   const MAX_CELLS = 18;
   let unitsInMetric = true;
 
@@ -60,7 +59,7 @@ const SnowRequest = function(): ISnowRequest {
 
   // Helper method to build forecast JSON object
   function pBuildForecast($: CheerioStatic, forecastOpt: IForecastRequest, cb: any) {
-    const firstTime = $($('.forecast-table-time__period')[0]).text();
+    const firstTime: TTimePeriods = $($('.forecast-table-time__period')[0]).text() as TTimePeriods;
     const snowForecast = $('span.snow');
     const rainForecast = $('span.rain');
     const freezingLevel = $('span.heightfl');
@@ -89,7 +88,7 @@ const SnowRequest = function(): ISnowRequest {
     //Loop over forecasts, get relevant information for each and push to temp array
     for (let i = 0; i < MAX_CELLS; i++) {
       let cellObj: IForecastCell = {
-        date: TimeUtil.getDay(forecastOpt.lastUpdateDate, forecastOpt.startDay, TimeUtil.getTimeOffset(firstTime), i),
+        date: TimeUtil.getDay(forecastOpt.lastUpdateDate, TimeUtil.getTimeOffset(firstTime), i),
         time: TimeUtil.getTime(TimeUtil.getTimeOffset(firstTime), forecastOpt.startDay, i), //issued[1] is startDay
         summary: $(summary[i]).text(),
         wind: parseInt($(winds[i]).text(), 10),
@@ -181,7 +180,7 @@ const SnowRequest = function(): ISnowRequest {
       );
 
       let firstTime = $($('.forecast-table-time__period')[0]).text();
-      let startDay = $($('.forecast-table-days__name')[0]).text() as TDays;
+      let startDay = $($('.forecast-table-days__name')[0]).text() as TDay;
 
       const lastUpdateDate = $($('.location-issued__no-wrap')[6]).text();
       //if the first column starts from 'night', first column would not display day.
@@ -199,7 +198,7 @@ const SnowRequest = function(): ISnowRequest {
         isMetric,
       };
 
-      const match = issuedDate.match(/^\d+/);
+      const match = issuedDate.match(/^\d+/)!;
       const time = [];
       const timeIndex = issuedDate.indexOf(match[0]) + match[0].length;
       time.push(issuedDate.substr(issuedDate.indexOf(match[0]), match[0].length));
