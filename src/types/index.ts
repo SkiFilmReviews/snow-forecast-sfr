@@ -75,4 +75,21 @@ export interface ITimeUtil {
   getCorrectDay: (day: string) => TDay;
   fixIssueDateFormat: (issuedDate: string) => string;
   getPrevDay: (startDay: TDay) => TDay;
-};
+}
+
+export interface IUnitUtil {
+  TO_MPH: number;
+  TO_KPH: number;
+  TO_CM: number;
+  TO_IN: number;
+  TO_FT: number;
+  TO_M: number;
+  speedToMetric: (speed: number) => number;
+  speedToImperial: (speed: number) => number;
+  distanceToMetric: (distance: number) => number;
+  distanceToImperial: (distance: number) => number;
+  volumeToMetric: (volume: number) => number;
+  volumeToImperial: (volume: number) => number;
+  temperatureToMetric: (temperature: number) => number;
+  temperatureToImperial: (temperature: number) => number;
+}

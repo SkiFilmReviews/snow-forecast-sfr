@@ -38,12 +38,12 @@
   "author": "Mike Spitz <mike@skifilmreviews.com> (http://github.com/MikeSpitz)",
   "license": "MIT",
   "dependencies": {
-    "@types/bent": "^7.0.1",
-    "@types/cheerio": "^0.22.17",
     "bent": "^7.1.2",
     "cheerio": "^1.0.0-rc.3"
   },
   "devDependencies": {
+    "@types/bent": "^7.0.1",
+    "@types/cheerio": "^0.22.17",
     "@types/jest": "^25.1.4",
     "jest": "^25.2.4",
     "prettier": "^2.0.2",

@@ -14,10 +14,8 @@ import {
 } from './types';
 
 import TimeUtil from './utils/time-util';
-
+import UnitUtil from './utils/unit-util';
 const stringStream = bent('string');
-const UnitUtil = require('../unit-util');
-
 
 const SnowRequest = function(): ISnowRequest {
   const coreURL = 'https://www.snow-forecast.com/resorts/';
@@ -211,7 +209,7 @@ const SnowRequest = function(): ISnowRequest {
         }
         return cb(obj);
       });
-    });
+    }, opts);
   };
 
   return {
