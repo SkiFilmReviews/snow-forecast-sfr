@@ -391,6 +391,23 @@ We rely on the following npm modules:
 * [Cheerio](https://github.com/cheeriojs/cheerio)
 * [Bent](https://github.com/mikeal/bent)
 
+## Contributing
+
+We love having people help us out. Please feel free to open an issue or open a PR. To make sure your PR is merge ready please run the following commands and commit any changes:
+
+```js
+yarn format
+yarn lint --fix
+```
+
+If you have no more linting issues then make sure all tests run like so:
+
+```js
+yarn test
+```
+
+And create the PR! :)
+
 ## Future Features
 
 We have a few ideas but we would love to hear any you encounter in. Feel free to raise an issue and let us know :)
