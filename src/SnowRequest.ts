@@ -13,8 +13,8 @@ import {
   TWindDirection,
 } from './types';
 
-import TimeUtil from './utils/time-util';
-import UnitUtil from './utils/unit-util';
+import TimeUtil from './utils/TimeUtil';
+import UnitUtil from './utils/UnitUtil';
 const stringStream = bent('string');
 
 const SnowRequest = function(): ISnowRequest {
@@ -82,7 +82,7 @@ const SnowRequest = function(): ISnowRequest {
       forecast: [],
     };
 
-    const forecastArr: [IForecastCell?] = [];
+    const forecastArr: IForecastCell[] = [];
     //Loop over forecasts, get relevant information for each and push to temp array
     for (let i = 0; i < MAX_CELLS; i++) {
       let cellObj: IForecastCell = {

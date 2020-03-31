@@ -1,7 +1,7 @@
 /**
  * Wrapper class for internal snow-request
  */
-import SnowRequest from './snow-request';
+import SnowRequest from './SnowRequest';
 import { IParseOptions, ISnowRequest, TElevation, TResortName } from './types';
 
 const request: ISnowRequest = SnowRequest();

@@ -54,12 +54,13 @@ export interface IForecastCell {
 }
 
 export interface IForecast {
+  error?: IRequestError;
   name: TResortName;
   url: TUrl;
   issuedDate: TIssuedDate;
   elevation: TElevation;
   units: TUnits;
-  forecast: [IForecastCell?];
+  forecast: IForecastCell[];
 }
 
 export interface ITimeUtil {
