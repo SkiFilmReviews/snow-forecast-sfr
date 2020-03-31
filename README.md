@@ -57,7 +57,7 @@ const snow = require('snow-forecast-sfr').default;
 We were creating our own hybrid date to mimic snow-forecast.com and we relied on moment to do that. We've removed the moment dependency (making this module a lot smaller) and are just using the in built .toDateString()
 
 Your JSON before:
-```json
+```js
 {
   name: "Valle-Nevado",
   url: "https://www.snow-forecast.com/resorts//6day/top",
@@ -85,7 +85,7 @@ Your JSON before:
 
 Your JSON now:
 
-```json
+```js
 {
   name: "Valle-Nevado",
   url: "https://www.snow-forecast.com/resorts/Valle-Nevado/6day/top",
@@ -113,7 +113,7 @@ Your JSON now:
 
 ## Sample JSON
 
-```json
+```js
 {
   name: 'Valle-Nevado',
   url: 'https://www.snow-forecast.com/resorts/Valle-Nevado/6day/mid',
