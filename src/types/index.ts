@@ -42,7 +42,7 @@ export interface IForecastRequest {
 export interface IForecastCell {
   date: string;
   time: string;
-  summary: string; //TODO
+  summary: string; // TODO
   wind: number;
   windDirection: string; // TODO
   snow: number;

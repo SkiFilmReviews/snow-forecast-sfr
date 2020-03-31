@@ -38,7 +38,7 @@ describe('Given the UnitUtil', () => {
       expect(speed).toBe(15);
     });
     it('should convert 37.53920 kph to 25 mph', () => {
-      const speed = UnitUtil.speedToImperial(37.53920);
+      const speed = UnitUtil.speedToImperial(37.5392);
       expect(speed).toBe(25);
     });
     it('should convert 50 kph to 30 mph', () => {
@@ -134,64 +134,64 @@ describe('Given the UnitUtil', () => {
   });
 
   describe('- when converting degrees celsius to fahrenheit', () => {
-    it('should return 32 when given 0', () =>{
+    it('should return 32 when given 0', () => {
       const temperature = UnitUtil.temperatureToImperial(0);
       expect(temperature).toBe(32);
     });
 
-    it('should return 27 when given -3', () =>{
+    it('should return 27 when given -3', () => {
       const temperature = UnitUtil.temperatureToImperial(-3);
       expect(temperature).toBe(27);
     });
 
-    it('should return -4 when given -20', () =>{
+    it('should return -4 when given -20', () => {
       const temperature = UnitUtil.temperatureToImperial(-20);
       expect(temperature).toBe(-4);
     });
 
-    it('should return 0 when given -18', () =>{
+    it('should return 0 when given -18', () => {
       const temperature = UnitUtil.temperatureToImperial(-18);
       expect(temperature).toBe(0);
     });
 
-    it('should return 64 when given 18', () =>{
+    it('should return 64 when given 18', () => {
       const temperature = UnitUtil.temperatureToImperial(18);
       expect(temperature).toBe(64);
     });
 
-    it('should return 41 when given 5', () =>{
+    it('should return 41 when given 5', () => {
       const temperature = UnitUtil.temperatureToImperial(5);
       expect(temperature).toBe(41);
     });
   });
 
   describe('- when converting degrees fahrenheit to celsius', () => {
-    it('should return -18 when given 0', () =>{
+    it('should return -18 when given 0', () => {
       const temperature = UnitUtil.temperatureToMetric(0);
       expect(temperature).toBe(-18);
     });
 
-    it('should return -7 when given 20', () =>{
+    it('should return -7 when given 20', () => {
       const temperature = UnitUtil.temperatureToMetric(20);
       expect(temperature).toBe(-7);
     });
 
-    it('should return 1 when given 33', () =>{
+    it('should return 1 when given 33', () => {
       const temperature = UnitUtil.temperatureToMetric(33);
       expect(temperature).toBe(1);
     });
 
-    it('should return 4 when given 39', () =>{
+    it('should return 4 when given 39', () => {
       const temperature = UnitUtil.temperatureToMetric(39);
       expect(temperature).toBe(4);
     });
 
-    it('should return -11 when given 12', () =>{
+    it('should return -11 when given 12', () => {
       const temperature = UnitUtil.temperatureToMetric(12);
       expect(temperature).toBe(-11);
     });
 
-    it('should return -5 when given 23', () =>{
+    it('should return -5 when given 23', () => {
       const temperature = UnitUtil.temperatureToMetric(23);
       expect(temperature).toBe(-5);
     });

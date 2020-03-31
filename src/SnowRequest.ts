@@ -6,9 +6,13 @@ import {
   IForecastRequest,
   IParseOptions,
   IRequestError,
-  ISnowRequest, TDay,
-  TElevation, TResortName, TSnowRequestError,
-  TSnowRequestMessage, TTimePeriods,
+  ISnowRequest,
+  TDay,
+  TElevation,
+  TResortName,
+  TSnowRequestError,
+  TSnowRequestMessage,
+  TTimePeriods,
   TUrl,
   TWindDirection,
 } from './types';
@@ -17,7 +21,7 @@ import TimeUtil from './utils/TimeUtil';
 import UnitUtil from './utils/UnitUtil';
 const stringStream = bent('string');
 
-const SnowRequest = function(): ISnowRequest {
+const SnowRequest = function (): ISnowRequest {
   const coreURL = 'https://www.snow-forecast.com/resorts/';
   const MAX_CELLS = 18;
   let unitsInMetric = true;
@@ -29,14 +33,14 @@ const SnowRequest = function(): ISnowRequest {
       unitsInMetric = !opts || typeof opts.inMetric === 'undefined' ? true : opts.inMetric;
 
       try {
-        if (response.length < 1500 && response.indexOf('The page you were looking for doesn\'t exist') > -1) {
+        if (response.length < 1500 && response.indexOf("The page you were looking for doesn't exist") > -1) {
           return cb([
             'Invalid page(404)',
             'Unable to find relevant resort forecast, ' + 'please check the spelling and try again',
             url,
           ]);
         }
-        const $: CheerioStatic = cheerio.load(response); //Load html using cheerio for parsing
+        const $: CheerioStatic = cheerio.load(response); // Load html using cheerio for parsing
         cb($);
       } catch (ex) {
         cb(['Parse error', ex, url]);
@@ -72,7 +76,7 @@ const SnowRequest = function(): ISnowRequest {
     const windChill = $(windChillTempContainer).find('span.temp');
     const summary = $('table tr[data-row="phrases"] span');
 
-    //Create forecast object, and init forecast array for later
+    // Create forecast object, and init forecast array for later
     const forecastObj: IForecast = {
       name: forecastOpt.resort,
       url: forecastOpt.url,
@@ -83,11 +87,11 @@ const SnowRequest = function(): ISnowRequest {
     };
 
     const forecastArr: IForecastCell[] = [];
-    //Loop over forecasts, get relevant information for each and push to temp array
+    // Loop over forecasts, get relevant information for each and push to temp array
     for (let i = 0; i < MAX_CELLS; i++) {
       let cellObj: IForecastCell = {
         date: TimeUtil.getDay(forecastOpt.lastUpdateDate, TimeUtil.getTimeOffset(firstTime), i),
-        time: TimeUtil.getTime(TimeUtil.getTimeOffset(firstTime), forecastOpt.startDay, i), //issued[1] is startDay
+        time: TimeUtil.getTime(TimeUtil.getTimeOffset(firstTime), forecastOpt.startDay, i), // issued[1] is startDay
         summary: $(summary[i]).text(),
         wind: parseInt($(winds[i]).text(), 10),
         windDirection: pGetWindDirection($, winds[i]),
@@ -99,7 +103,7 @@ const SnowRequest = function(): ISnowRequest {
         windChill: parseInt($(windChill[i]).text(), 10), // TODO formatNumber helper with default
       };
 
-      //If units requested isn't what's returned, convert
+      // If units requested isn't what's returned, convert
       if (forecastOpt.isMetric !== unitsInMetric) {
         cellObj = pConvertUnits(cellObj, unitsInMetric);
       }
@@ -123,8 +127,8 @@ const SnowRequest = function(): ISnowRequest {
     }
 
     const imageCellAlt = $(img[0]).attr('alt');
-    //We don't want the speed just direction, so split string and get last part
-    if (imageCellAlt && imageCellAlt.split(' ').length == MAX_DESC_PARTS) {
+    // We don't want the speed just direction, so split string and get last part
+    if (imageCellAlt && imageCellAlt.split(' ').length === MAX_DESC_PARTS) {
       return imageCellAlt.split(' ')[1] as TWindDirection;
     }
 
@@ -151,8 +155,13 @@ const SnowRequest = function(): ISnowRequest {
     return obj;
   }
 
-  //PUBLIC: Method used to set the parsing in motion.
-  const parseResort = function(resort: TResortName, elevation: TElevation, cb: any, opts?: IParseOptions): IRequestError | IForecast | undefined {
+  // PUBLIC: Method used to set the parsing in motion.
+  const parseResort = function (
+    resort: TResortName,
+    elevation: TElevation,
+    cb: any,
+    opts?: IParseOptions,
+  ): IRequestError | IForecast | undefined {
     if (arguments.length < 3) {
       return pBuildErrorJSON(
         'Insufficient parameters',
@@ -161,55 +170,59 @@ const SnowRequest = function(): ISnowRequest {
       );
     }
 
-    const url = coreURL + resort + '/6day/' + elevation; //Build the url
+    const url = coreURL + resort + '/6day/' + elevation; // Build the url
 
-    pMakeRequest(url, function($: CheerioStatic) {
-      if ($ instanceof Array) {
-        //An error has occurred, feedback info to user.
-        cb(pBuildErrorJSON($[0], $[1], $[2]));
-        return;
-      }
-
-      //Find out if response is in metric or not.
-      const isMetric = $('.deg-c input').attr('checked') === 'checked';
-      //Extrapolate time-relevant information needed to build forecast, and build object.
-      const issuedDate = TimeUtil.fixIssueDateFormat(
-        $($('.location-issued__no-wrap')[5]).text() + $($('.location-issued__no-wrap')[6]).text(),
-      );
-
-      let firstTime = $($('.forecast-table-time__period')[0]).text();
-      let startDay = $($('.forecast-table-days__name')[0]).text() as TDay;
-
-      const lastUpdateDate = $($('.location-issued__no-wrap')[6]).text();
-      //if the first column starts from 'night', first column would not display day.
-      if (firstTime === 'night') {
-        startDay = TimeUtil.getPrevDay(startDay);
-      }
-
-      const forecastRequest: IForecastRequest = {
-        resort,
-        elevation,
-        url,
-        issuedDate,
-        lastUpdateDate,
-        startDay,
-        isMetric,
-      };
-
-      const match = issuedDate.match(/^\d+/)!;
-      const time = [];
-      const timeIndex = issuedDate.indexOf(match[0]) + match[0].length;
-      time.push(issuedDate.substr(issuedDate.indexOf(match[0]), match[0].length));
-      time.push(issuedDate.substr(timeIndex, timeIndex + 2));
-      time.push(issuedDate.substr(timeIndex + 3).split(/[\s]+/));
-
-      pBuildForecast($, forecastRequest, function(obj: IForecast) {
-        if (!obj) {
-          return cb(pBuildErrorJSON('JSON Construction Error', 'Internal error occurred, please try again', url));
+    pMakeRequest(
+      url,
+      function ($: CheerioStatic) {
+        if ($ instanceof Array) {
+          // An error has occurred, feedback info to user.
+          cb(pBuildErrorJSON($[0], $[1], $[2]));
+          return;
         }
-        return cb(obj);
-      });
-    }, opts);
+
+        // Find out if response is in metric or not.
+        const isMetric = $('.deg-c input').attr('checked') === 'checked';
+        // Extrapolate time-relevant information needed to build forecast, and build object.
+        const issuedDate = TimeUtil.fixIssueDateFormat(
+          $($('.location-issued__no-wrap')[5]).text() + $($('.location-issued__no-wrap')[6]).text(),
+        );
+
+        const firstTime = $($('.forecast-table-time__period')[0]).text();
+        let startDay = $($('.forecast-table-days__name')[0]).text() as TDay;
+
+        const lastUpdateDate = $($('.location-issued__no-wrap')[6]).text();
+        // if the first column starts from 'night', first column would not display day.
+        if (firstTime === 'night') {
+          startDay = TimeUtil.getPrevDay(startDay);
+        }
+
+        const forecastRequest: IForecastRequest = {
+          resort,
+          elevation,
+          url,
+          issuedDate,
+          lastUpdateDate,
+          startDay,
+          isMetric,
+        };
+
+        const match = issuedDate.match(/^\d+/)!;
+        const time = [];
+        const timeIndex = issuedDate.indexOf(match[0]) + match[0].length;
+        time.push(issuedDate.substr(issuedDate.indexOf(match[0]), match[0].length));
+        time.push(issuedDate.substr(timeIndex, timeIndex + 2));
+        time.push(issuedDate.substr(timeIndex + 3).split(/[\s]+/));
+
+        pBuildForecast($, forecastRequest, function (obj: IForecast) {
+          if (!obj) {
+            return cb(pBuildErrorJSON('JSON Construction Error', 'Internal error occurred, please try again', url));
+          }
+          return cb(obj);
+        });
+      },
+      opts,
+    );
   };
 
   return {
