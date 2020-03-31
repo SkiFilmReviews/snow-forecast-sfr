@@ -1,15 +1,24 @@
-# snow-forecast-sfr - V1.7.0 [![Build Status](https://travis-ci.org/SkiFilmReviews/snow-forecast-sfr.svg?branch=master)](https://travis-ci.org/SkiFilmReviews/snow-forecast-sfr)
+# snow-forecast-sfr - V2.0.0 [![Build Status](https://travis-ci.org/SkiFilmReviews/snow-forecast-sfr.svg?branch=master)](https://travis-ci.org/SkiFilmReviews/snow-forecast-sfr)
 Source code for the npm module that scrapes snow-forecast.com. This is an unofficial scraper.
 
 ## Introduction
 Enough chit-chat, just show me how to use it in 5 lines.
 
 ```js
-var snow = require('snow-forecast-sfr');
+const snow = require('snow-forecast-sfr').default;
 
 snow.parseResort('Tignes', 'mid', function(json){
       //json contains the forecast JSON
 });
+```
+
+The module is also fully typed so you can also do the following:
+```typescript
+import SnowRequest, { IForecast } from 'snow-forecast-sfr';
+
+SnowRequest.parseResort('Tignes', 'mid', (json: IForecast) => {
+  //json contains the forecast JSON
+}, { inMetric: false });
 ```
 
 ## Options
@@ -27,13 +36,31 @@ snow.parseResort('Tignes', 'mid', function(json){
 By passing in an options hash with the value for the isMetric key set to true for
 metric, or false for imperial.
 
+## V1 -> V2 migration guide
 
-## Sample JSON
+V2 is a lot smaller and is now fully typed with typescript. We tried to avoid any breaking changes but they are as follows:
+
+### Typescript compatible
+
+Comes bundled with all the types ready to use in any of your typescript projects.
+
+### If you use require
+
+You need to add .default to the end of your require statement:
 
 ```js
+const snow = require('snow-forecast-sfr').default;
+```
+
+### The date per forecast cell is now different
+
+We were creating our own hybrid date to mimic snow-forecast.com and we relied on moment to do that. We've removed the moment dependency (making this module a lot smaller) and are just using the in built .toDateString()
+
+Your JSON before:
+```json
 {
   name: "Valle-Nevado",
-  url: "http://www.snow-forecast.com/resorts/Valle-Nevado/6day/top",
+  url: "https://www.snow-forecast.com/resorts//6day/top",
   issuedDate: "7am 04 Jun 2016",
   elevation: "top",
   units: "metric",
@@ -50,227 +77,283 @@ metric, or false for imperial.
       minTemp: -16,
       maxTemp: -13,
       windChill: -25
-    },
+    }
+    // Other forecasts removed for brevity
+  ]
+}  
+```
+
+Your JSON now:
+
+```json
+{
+  name: "Valle-Nevado",
+  url: "https://www.snow-forecast.com/resorts/Valle-Nevado/6day/top",
+  issuedDate: "7am 04 Jun 2016",
+  elevation: "top",
+  units: "metric",
+  forecast: [
     {
-      date: "4th Jun 16",
-      time: "Saturday PM",
+      date: "Sat Jun 04 2016",
+      time: "Saturday AM",
       summary: "snow shwrs",
       wind: 15,
       windDirection: "NW",
-      snow: 0,
-      rain: 0,
-      freezingLevel: 1650,
-      minTemp: -13,
-      maxTemp: -12,
-      windChill: -25
-    },
-    {
-      date: "4th Jun 16",
-      time: "Saturday night",
-      summary: "snow shwrs",
-      wind: 15,
-      windDirection: "NNW",
-      snow: 1,
-      rain: 0,
-      freezingLevel: 1350,
-      minTemp: -16,
-      maxTemp: -15,
-      windChill: -27
-    },
-    {
-      date: "5th Jun 16",
-      time: "Sunday AM",
-      summary: "snow shwrs",
-      wind: 10,
-      windDirection: "WNW",
-      snow: 0,
+      snow: 4,
       rain: 0,
       freezingLevel: 1750,
       minTemp: -16,
       maxTemp: -13,
-      windChill: -20
-    },
+      windChill: -25
+    }
+    // Other forecasts removed for brevity
+  ]
+}  
+```
+
+## Sample JSON
+
+```json
+{
+  name: 'Valle-Nevado',
+  url: 'https://www.snow-forecast.com/resorts/Valle-Nevado/6day/mid',
+  issuedDate: '2am 31 Mar 2020',
+  elevation: 'mid',
+  units: 'imperial',
+  forecast: [
     {
-      date: "5th Jun 16",
-      time: "Sunday PM",
-      summary: "snow shwrs",
+      date: 'Tue Mar 31 2020',
+      time: 'Tuesday AM',
+      summary: 'clear',
       wind: 5,
-      windDirection: "WSW",
+      windDirection: '',
       snow: 0,
       rain: 0,
-      freezingLevel: 1650,
-      minTemp: -13,
-      maxTemp: -13,
-      windChill: -15
+      freezingLevel: 14900,
+      minTemp: 48,
+      maxTemp: 50,
+      windChill: 8
     },
     {
-      date: "5th Jun 16",
-      time: "Sunday night",
-      summary: "clear",
+      date: 'Tue Mar 31 2020',
+      time: 'Tuesday PM',
+      summary: 'clear',
+      wind: 5,
+      windDirection: '',
+      snow: 0,
+      rain: 0,
+      freezingLevel: 15400,
+      minTemp: 48,
+      maxTemp: 50,
+      windChill: 8
+    },
+    {
+      date: 'Tue Mar 31 2020',
+      time: 'Tuesday night',
+      summary: 'clear',
+      wind: 5,
+      windDirection: '',
+      snow: 0,
+      rain: 0,
+      freezingLevel: 14900,
+      minTemp: 46,
+      maxTemp: 48,
+      windChill: 7
+    },
+    {
+      date: 'Wed Apr 01 2020',
+      time: 'Wednesday AM',
+      summary: 'clear',
+      wind: 5,
+      windDirection: '',
+      snow: 0,
+      rain: 0,
+      freezingLevel: 14400,
+      minTemp: 46,
+      maxTemp: 48,
+      windChill: 7
+    },
+    {
+      date: 'Wed Apr 01 2020',
+      time: 'Wednesday PM',
+      summary: 'clear',
       wind: 10,
-      windDirection: "E",
+      windDirection: '',
       snow: 0,
       rain: 0,
-      freezingLevel: 1250,
-      minTemp: -16,
-      maxTemp: -14,
-      windChill: -18
+      freezingLevel: 14900,
+      minTemp: 48,
+      maxTemp: 50,
+      windChill: 8
     },
     {
-      date: "6th Jun 16",
-      time: "Monday AM",
-      summary: "clear",
+      date: 'Wed Apr 01 2020',
+      time: 'Wednesday night',
+      summary: 'clear',
       wind: 5,
-      windDirection: "SSW",
+      windDirection: '',
       snow: 0,
       rain: 0,
-      freezingLevel: 2250,
-      minTemp: -13,
-      maxTemp: -9,
-      windChill: -14
+      freezingLevel: 15300,
+      minTemp: 48,
+      maxTemp: 52,
+      windChill: 9
     },
     {
-      date: "6th Jun 16",
-      time: "Monday PM",
-      summary: "clear",
+      date: 'Thu Apr 02 2020',
+      time: 'Thursday AM',
+      summary: 'some clouds',
       wind: 5,
-      windDirection: "SW",
+      windDirection: '',
       snow: 0,
       rain: 0,
-      freezingLevel: 2200,
-      minTemp: -9,
-      maxTemp: -8,
-      windChill: -10
+      freezingLevel: 15600,
+      minTemp: 52,
+      maxTemp: 55,
+      windChill: 11
     },
     {
-      date: "6th Jun 16",
-      time: "Monday night",
-      summary: "clear",
+      date: 'Thu Apr 02 2020',
+      time: 'Thursday PM',
+      summary: 'clear',
+      wind: 5,
+      windDirection: '',
+      snow: 0,
+      rain: 0,
+      freezingLevel: 16100,
+      minTemp: 54,
+      maxTemp: 55,
+      windChill: 12
+    },
+    {
+      date: 'Thu Apr 02 2020',
+      time: 'Thursday night',
+      summary: 'clear',
       wind: 0,
-      windDirection: "NNE",
+      windDirection: '',
       snow: 0,
       rain: 0,
-      freezingLevel: 2150,
-      minTemp: -10,
-      maxTemp: -9,
-      windChill: -10
+      freezingLevel: 15700,
+      minTemp: 52,
+      maxTemp: 54,
+      windChill: 11
     },
     {
-      date: "7th Jun 16",
-      time: "Tuesday AM",
-      summary: "clear",
-      wind: 10,
-      windDirection: "WSW",
+      date: 'Fri Apr 03 2020',
+      time: 'Friday AM',
+      summary: 'clear',
+      wind: 0,
+      windDirection: '',
       snow: 0,
       rain: 0,
-      freezingLevel: 2700,
-      minTemp: -10,
-      maxTemp: -6,
-      windChill: -11
+      freezingLevel: 15400,
+      minTemp: 52,
+      maxTemp: 54,
+      windChill: 11
     },
     {
-      date: "7th Jun 16",
-      time: "Tuesday PM",
-      summary: "clear",
-      wind: 10,
-      windDirection: "WSW",
-      snow: 0,
-      rain: 0,
-      freezingLevel: 2600,
-      minTemp: -7,
-      maxTemp: -6,
-      windChill: -8
-    },
-    {
-      date: "7th Jun 16",
-      time: "Tuesday night",
-      summary: "clear",
+      date: 'Fri Apr 03 2020',
+      time: 'Friday PM',
+      summary: 'clear',
       wind: 5,
-      windDirection: "N",
+      windDirection: '',
       snow: 0,
       rain: 0,
-      freezingLevel: 2350,
-      minTemp: -9,
-      maxTemp: -9,
-      windChill: -9
+      freezingLevel: 15700,
+      minTemp: 50,
+      maxTemp: 54,
+      windChill: 9
     },
     {
-      date: "8th Jun 16",
-      time: "Wednesday AM",
-      summary: "clear",
+      date: 'Fri Apr 03 2020',
+      time: 'Friday night',
+      summary: 'clear',
       wind: 5,
-      windDirection: "WNW",
+      windDirection: '',
       snow: 0,
       rain: 0,
-      freezingLevel: 2900,
-      minTemp: -9,
-      maxTemp: -5,
-      windChill: -9
+      freezingLevel: 14900,
+      minTemp: 48,
+      maxTemp: 50,
+      windChill: 9
     },
     {
-      date: "8th Jun 16",
-      time: "Wednesday PM",
-      summary: "clear",
+      date: 'Sat Apr 04 2020',
+      time: 'Saturday AM',
+      summary: 'clear',
       wind: 5,
-      windDirection: "NNW",
+      windDirection: '',
       snow: 0,
       rain: 0,
-      freezingLevel: 2550,
-      minTemp: -8,
-      maxTemp: -5,
-      windChill: -9
+      freezingLevel: 14600,
+      minTemp: 48,
+      maxTemp: 48,
+      windChill: 8
     },
     {
-      date: "8th Jun 16",
-      time: "Wednesday night",
-      summary: "clear",
+      date: 'Sat Apr 04 2020',
+      time: 'Saturday PM',
+      summary: 'clear',
       wind: 10,
-      windDirection: "N",
+      windDirection: '',
       snow: 0,
       rain: 0,
-      freezingLevel: 2000,
-      minTemp: -11,
-      maxTemp: -10,
-      windChill: -13
+      freezingLevel: 14400,
+      minTemp: 45,
+      maxTemp: 48,
+      windChill: 5
     },
     {
-      date: "9th Jun 16",
-      time: "Thursday AM",
-      summary: "some clouds",
-      wind: 15,
-      windDirection: "NNW",
+      date: 'Sat Apr 04 2020',
+      time: 'Saturday night',
+      summary: 'clear',
+      wind: 5,
+      windDirection: '',
       snow: 0,
       rain: 0,
-      freezingLevel: 2650,
-      minTemp: -10,
-      maxTemp: -7,
-      windChill: -15
+      freezingLevel: 13800,
+      minTemp: 43,
+      maxTemp: 45,
+      windChill: 5
     },
     {
-      date: "9th Jun 16",
-      time: "Thursday PM",
-      summary: "light snow",
-      wind: 10,
-      windDirection: "NNW",
-      snow: 1,
+      date: 'Sun Apr 05 2020',
+      time: 'Sunday AM',
+      summary: 'clear',
+      wind: 5,
+      windDirection: '',
+      snow: 0,
       rain: 0,
-      freezingLevel: 2050,
-      minTemp: -10,
-      maxTemp: -7,
-      windChill: -12
+      freezingLevel: 13100,
+      minTemp: 41,
+      maxTemp: 45,
+      windChill: 3
     },
     {
-      date: "9th Jun 16",
-      time: "Thursday night",
-      summary: "mod. snow",
-      wind: 15,
-      windDirection: "NNW",
-      snow: 7,
+      date: 'Sun Apr 05 2020',
+      time: 'Sunday PM',
+      summary: 'clear',
+      wind: 5,
+      windDirection: '',
+      snow: 0,
       rain: 0,
-      freezingLevel: 2050,
-      minTemp: -12,
-      maxTemp: -11,
-      windChill: -14
+      freezingLevel: 13500,
+      minTemp: 43,
+      maxTemp: 43,
+      windChill: 3
+    },
+    {
+      date: 'Sun Apr 05 2020',
+      time: 'Sunday night',
+      summary: 'clear',
+      wind: 5,
+      windDirection: '',
+      snow: 0,
+      rain: 0,
+      freezingLevel: 13600,
+      minTemp: 43,
+      maxTemp: 45,
+      windChill: 5
     }
   ]
 }
@@ -285,8 +368,7 @@ parseResort takes three parameters, the name of the resort (as is found on snow-
 
 ### Types of Errors
 * Insufficient parameters - You haven't passed the proper number of parameters into the parseResort method.
-* Invalid page 404 - snow-forecast.com returned a 404, usually because the resort name you gave differs to how it's used on snow-forecast.com
-* Remote server error - Unable to connect to snow-forecast.com. Check whether the network is operating properly. Alternatively, the site may be down.
+* Remote server error - This can be due to a 404 or because we were unable to connect to snow-forecast.com. Check whether the network is operating properly. Alternatively, the site may be down.
 * Parse error - The parsing has failed. This should never happen.
 * JSON Construction error - We were unable to build the forecast. This should never happen.
 
@@ -296,10 +378,10 @@ This is an unofficial module, and thus if snow-forecast decide to change the str
 
 ## Testing
 
-In order to run the suite of jasmine tests run the following code:
+In order to run the suite of jest tests run the following code:
 
 ```js
-npm test
+yarn test
 ```
 
 
@@ -307,8 +389,24 @@ npm test
 
 We rely on the following npm modules:
 * [Cheerio](https://github.com/cheeriojs/cheerio)
-* [Request](https://github.com/request/request)
-* [Moment](https://github.com/moment/moment/)
+* [Bent](https://github.com/mikeal/bent)
+
+## Contributing
+
+We love having people help us out. Please feel free to open an issue or open a PR. To make sure your PR is merge ready please run the following commands and commit any changes:
+
+```js
+yarn format
+yarn lint --fix
+```
+
+If you have no more linting issues then make sure all tests run like so:
+
+```js
+yarn test
+```
+
+And create the PR! :)
 
 ## Future Features
 

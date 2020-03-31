@@ -1,15 +1,31 @@
 {
   "name": "snow-forecast-sfr",
-  "version": "1.7.0",
+  "version": "2.0.0",
   "description": "An NPM module that scrapes snow-forecast for the relevant resort and returns its information.",
-  "main": "snow-forecast.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
-    "test": "jasmine-node spec/"
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
+    "test": "jest --config jestconfig.json",
+    "prepare": "yarn build",
+    "prepublishOnly": "yarn test && yarn lint",
+    "preversion": "yarn lint",
+    "version": "yarn format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/SkiFilmReviews/snow-forecast-npm.git"
   },
+  "homepage": "https://github.com/SkiFilmReviews/snow-forecast-sfr#readme",
+  "bugs": {
+    "url": "https://github.com/SkiFilmReviews/snow-forecast-sfr/issues"
+  },
+  "files": [
+    "lib/**/*"
+  ],
   "keywords": [
     "snow",
     "forecast",
@@ -21,16 +37,25 @@
     "snowboard",
     "snowboarding",
     "snow-forecast",
-    "api"
+    "api",
+    "weather",
+    "weather forecast"
   ],
   "author": "Mike Spitz <mike@skifilmreviews.com> (http://github.com/MikeSpitz)",
   "license": "MIT",
   "dependencies": {
-    "cheerio": "^0.22.0",
-    "moment": "^2.10.6",
-    "request": "^2.55.0"
+    "bent": "^7.1.2",
+    "cheerio": "^1.0.0-rc.3"
   },
   "devDependencies": {
-    "jasmine-node": "^3.0.0"
+    "@types/bent": "^7.0.1",
+    "@types/cheerio": "^0.22.17",
+    "@types/jest": "^25.1.4",
+    "jest": "^25.2.4",
+    "prettier": "^2.0.2",
+    "ts-jest": "^25.3.0",
+    "tslint": "^6.1.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.8.3"
   }
 }
