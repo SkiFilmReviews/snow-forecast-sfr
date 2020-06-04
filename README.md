@@ -1,4 +1,4 @@
-# snow-forecast-sfr - V2.0.0 [![Build Status](https://travis-ci.org/SkiFilmReviews/snow-forecast-sfr.svg?branch=master)](https://travis-ci.org/SkiFilmReviews/snow-forecast-sfr)
+# snow-forecast-sfr - V2.0.1 [![Build Status](https://travis-ci.org/SkiFilmReviews/snow-forecast-sfr.svg?branch=master)](https://travis-ci.org/SkiFilmReviews/snow-forecast-sfr)
 Source code for the npm module that scrapes snow-forecast.com. This is an unofficial scraper.
 
 ## V2
@@ -35,6 +35,7 @@ SnowRequest.parseResort('Tignes', 'mid', (json: IForecast) => {
 
 ## Options
 
+### Units
 Currently snow-forecast decides whether to show units in metric or imperial based
 on where the request is coming from. If you need to specify whether the response
 should be in imperial or metric units simply do the following:
@@ -47,6 +48,28 @@ snow.parseResort('Tignes', 'mid', function(json){
 
 By passing in an options hash with the value for the isMetric key set to true for
 metric, or false for imperial.
+
+### CORS
+
+We *strongly* recommend against using this feature in production. You should have your own proxy API set up. However, you can use existing proxy URL solutions (![ThingProxy](https://github.com/Freeboard/thingproxy) or ![CORS Anywhere](https://cors-anywhere.herokuapp.com/) among numerous others) to help mitigate this on your development environment
+
+In order to get this working you can do the following:
+
+```js
+snow.parseResort('Tignes', 'mid', function(json){
+      //json contains the forecast JSON
+}, { isMetric: false, proxyUrl: 'the proxy url you will use'});
+```
+
+If you need to pass in any headers to the proxyUrl you can do so as key value pairs e.g.
+
+```js
+snow.parseResort('Tignes', 'mid', function(json){
+      //json contains the forecast JSON
+}, { isMetric: false, proxyUrl: 'the proxy url you will use', proxyOpts: {
+  origin: 'https://snow-forecast.com'
+}});
+```
 
 ## V1 -> V2 migration guide
 

@@ -21,6 +21,8 @@ export interface ISnowRequest {
 
 export interface IParseOptions {
   inMetric?: boolean;
+  proxyOpts?: object;
+  proxyUrl?: string;
 }
 
 export interface IRequestError {
