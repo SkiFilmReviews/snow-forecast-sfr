@@ -19,7 +19,6 @@ import {
 
 import TimeUtil from './utils/TimeUtil';
 import UnitUtil from './utils/UnitUtil';
-const stringStream = bent('string');
 
 const SnowRequest = function (): ISnowRequest {
   const coreURL = 'https://www.snow-forecast.com/resorts/';
@@ -29,6 +28,9 @@ const SnowRequest = function (): ISnowRequest {
   // Fires off a specific request to snow-forecast and passes response to callback
   async function pMakeRequest(url: TUrl, cb: any, opts?: IParseOptions) {
     try {
+      const requestOpts = opts?.proxyOpts || {};
+      const stringStream = bent('string', requestOpts);
+
       const response = await stringStream(url);
       unitsInMetric = !opts || typeof opts.inMetric === 'undefined' ? true : opts.inMetric;
 
@@ -170,7 +172,10 @@ const SnowRequest = function (): ISnowRequest {
       );
     }
 
-    const url = coreURL + resort + '/6day/' + elevation; // Build the url
+    let url = coreURL + resort + '/6day/' + elevation; // Build the url
+    if(opts?.proxyUrl) {
+      url = `${opts.proxyUrl}${url}`;
+    }
 
     pMakeRequest(
       url,
