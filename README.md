@@ -51,7 +51,7 @@ metric, or false for imperial.
 
 ### CORS
 
-We *strongly* recommend against using this feature in production. You should have your own proxy API set up. However, you can use existing proxy URL solutions (![ThingProxy](https://github.com/Freeboard/thingproxy) or ![CORS Anywhere](https://cors-anywhere.herokuapp.com/) among numerous others) to help mitigate this on your development environment
+We *strongly* recommend against using this feature in production. You should have your own proxy API set up. However, you can use existing proxy URL solutions ([ThingProxy](https://github.com/Freeboard/thingproxy) or [CORS Anywhere](https://cors-anywhere.herokuapp.com/) among numerous others) to help mitigate this on your development environment
 
 In order to get this working you can do the following:
 
