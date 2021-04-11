@@ -1,6 +1,6 @@
 {
   "name": "snow-forecast-sfr",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "An NPM module that scrapes snow-forecast for the relevant resort and returns its information.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

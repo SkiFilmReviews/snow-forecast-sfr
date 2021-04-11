@@ -187,10 +187,10 @@ const SnowRequest = function (): ISnowRequest {
         }
 
         // Find out if response is in metric or not.
-        const isMetric = $('.deg-c input').attr('checked') === 'checked';
+        const isMetric = $('.units-metric#body').length === 1;
         // Extrapolate time-relevant information needed to build forecast, and build object.
         const issuedDate = TimeUtil.fixIssueDateFormat(
-          $($('.location-issued__no-wrap')[5]).text() + $($('.location-issued__no-wrap')[6]).text(),
+          $($('.location-issued__no-wrap')[2]).text() + $($('.location-issued__no-wrap')[3]).text(),
         );
 
         const firstTime = $($('.forecast-table-time__period')[0]).text();
